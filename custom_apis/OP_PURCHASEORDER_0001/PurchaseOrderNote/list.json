@@ -1,0 +1,95 @@
+{
+  "description": "List records from PurchaseOrderNote",
+  "method": "GET",
+  "path": "/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderNote",
+  "url": "http://localhost:8000/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderNote",
+  "query_params": [
+    {
+      "name": "$top",
+      "type": "query",
+      "required": false,
+      "default": 100,
+      "schema": {
+        "python_type": "int"
+      }
+    },
+    {
+      "name": "$skip",
+      "type": "query",
+      "required": false,
+      "default": 0,
+      "schema": {
+        "python_type": "int"
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "PurchaseOrder": {
+          "name": "PurchaseOrder",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 10,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "TextObjectType": {
+          "name": "TextObjectType",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 4,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "Language": {
+          "name": "Language",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 2,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "PlainLongText": {
+          "name": "PlainLongText",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": null,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        }
+      },
+      "required": [
+        "PlainLongText"
+      ]
+    }
+  },
+  "capabilities": {
+    "readable": true,
+    "insertable": false,
+    "updatable": false,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  }
+}

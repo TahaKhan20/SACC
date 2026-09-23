@@ -1,0 +1,266 @@
+{
+  "description": "Update an existing A_BPDataControllerType record by key",
+  "method": "PATCH",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BPDataController/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BPDataController/item",
+  "query_params": [
+    {
+      "name": "BusinessPartner",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "DataController",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "DataController",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurposeForPersonalData",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurposeForPersonalData",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DataController": {
+        "name": "DataController",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeForPersonalData": {
+        "name": "PurposeForPersonalData",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DataControlAssignmentStatus": {
+        "name": "DataControlAssignmentStatus",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPDataControllerIsDerived": {
+        "name": "BPDataControllerIsDerived",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeDerived": {
+        "name": "PurposeDerived",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeType": {
+        "name": "PurposeType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPurposeFlag": {
+        "name": "BusinessPurposeFlag",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DataController": {
+        "name": "DataController",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeForPersonalData": {
+        "name": "PurposeForPersonalData",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 30,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DataControlAssignmentStatus": {
+        "name": "DataControlAssignmentStatus",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPDataControllerIsDerived": {
+        "name": "BPDataControllerIsDerived",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeDerived": {
+        "name": "PurposeDerived",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurposeType": {
+        "name": "PurposeType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPurposeFlag": {
+        "name": "BusinessPurposeFlag",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "updatable": true
+  }
+}

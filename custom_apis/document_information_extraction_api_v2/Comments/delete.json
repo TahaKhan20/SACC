@@ -1,0 +1,31 @@
+{
+  "description": "Delete a Comments record by key",
+  "method": "DELETE",
+  "path": "/api/services/document_information_extraction_api_v2/entities/Comments/item",
+  "url": "http://localhost:8000/api/services/document_information_extraction_api_v2/entities/Comments/item",
+  "query_params": [
+    {
+      "name": "ID",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ID",
+        "edm_type": "Edm.Guid",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": true
+  }
+}

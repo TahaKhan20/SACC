@@ -1,0 +1,214 @@
+{
+  "description": "Create a new A_CustSlsAreaAddrDepdntTaxInfoType record",
+  "method": "POST",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_CustSlsAreaAddrDepdntTaxInfo",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_CustSlsAreaAddrDepdntTaxInfo",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "Customer": {
+        "name": "Customer",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "SalesOrganization": {
+        "name": "SalesOrganization",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DistributionChannel": {
+        "name": "DistributionChannel",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Division": {
+        "name": "Division",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DepartureCountry": {
+        "name": "DepartureCountry",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerTaxCategory": {
+        "name": "CustomerTaxCategory",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerTaxClassification": {
+        "name": "CustomerTaxClassification",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "Customer": {
+        "name": "Customer",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "SalesOrganization": {
+        "name": "SalesOrganization",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DistributionChannel": {
+        "name": "DistributionChannel",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Division": {
+        "name": "Division",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DepartureCountry": {
+        "name": "DepartureCountry",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerTaxCategory": {
+        "name": "CustomerTaxCategory",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerTaxClassification": {
+        "name": "CustomerTaxClassification",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": true
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "service": "API_BUSINESS_PARTNER",
+  "entity_set": "A_CustomerSalesAreaTax",
+  "entity_type": "A_CustomerSalesAreaTaxType",
+  "keys": [
+    "Customer",
+    "SalesOrganization",
+    "DistributionChannel",
+    "Division",
+    "DepartureCountry",
+    "CustomerTaxCategory"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Customer",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "SalesOrganization",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "DistributionChannel",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Division",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "DepartureCountry",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CustomerTaxCategory",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CustomerTaxClassification",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 1,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "to_SlsAreaAddrDepdntTax",
+      "target_type": "A_CustSlsAreaAddrDepdntTaxInfoType",
+      "is_collection": true,
+      "nullable": true,
+      "partner": null,
+      "referential_constraints": []
+    }
+  ]
+}

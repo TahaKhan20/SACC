@@ -1,0 +1,83 @@
+{
+  "service": "API_BUSINESS_PARTNER",
+  "entity_set": "A_CustomerCompanyText",
+  "entity_type": "A_CustomerCompanyTextType",
+  "keys": [
+    "Customer",
+    "CompanyCode",
+    "Language",
+    "LongTextID"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Customer",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CompanyCode",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Language",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "LongTextID",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "LongText",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

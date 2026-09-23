@@ -1,0 +1,48 @@
+{
+  "description": "Delete a A_MaterialDocumentHeaderType record by key",
+  "method": "DELETE",
+  "path": "/api/services/API_MATERIAL_DOCUMENT_SRV/entities/A_MaterialDocumentHeader/item",
+  "url": "http://localhost:8000/api/services/API_MATERIAL_DOCUMENT_SRV/entities/A_MaterialDocumentHeader/item",
+  "query_params": [
+    {
+      "name": "MaterialDocumentYear",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "MaterialDocumentYear",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "MaterialDocument",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "MaterialDocument",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "description": "Update an existing A_BusinessPartnerAliasType record by key",
+  "method": "PATCH",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BusinessPartnerAlias/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BusinessPartnerAlias/item",
+  "query_params": [
+    {
+      "name": "BusinessPartner",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "BPAliasPositionNumber",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "BPAliasPositionNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPAliasPositionNumber": {
+        "name": "BPAliasPositionNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerAliasName": {
+        "name": "BusinessPartnerAliasName",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 80,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPAliasPositionNumber": {
+        "name": "BPAliasPositionNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerAliasName": {
+        "name": "BusinessPartnerAliasName",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 80,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "updatable": true
+  }
+}

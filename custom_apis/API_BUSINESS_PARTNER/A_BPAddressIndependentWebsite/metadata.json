@@ -1,0 +1,107 @@
+{
+  "service": "API_BUSINESS_PARTNER",
+  "entity_set": "A_BPAddressIndependentWebsite",
+  "entity_type": "A_BPAddressIndependentWebsiteType",
+  "keys": [
+    "BusinessPartner",
+    "AddressID",
+    "Person",
+    "OrdinalNumber"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "BusinessPartner",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "AddressID",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Person",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "OrdinalNumber",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "IsDefaultURLAddress",
+      "edm_type": "Edm.Boolean",
+      "python_type": "bool",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "URLFieldLength",
+      "edm_type": "Edm.Int32",
+      "python_type": "int",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "WebsiteURL",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 2048,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

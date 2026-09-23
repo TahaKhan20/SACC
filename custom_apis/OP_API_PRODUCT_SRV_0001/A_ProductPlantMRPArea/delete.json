@@ -1,0 +1,65 @@
+{
+  "description": "Delete a A_ProductPlantMRPAreaType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantMRPArea/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantMRPArea/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Plant",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "MRPArea",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "MRPArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

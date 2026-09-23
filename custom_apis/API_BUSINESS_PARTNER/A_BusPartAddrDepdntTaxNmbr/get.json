@@ -1,0 +1,138 @@
+{
+  "description": "Get a single A_BusPartAddrDepdntTaxNmbrType record by key",
+  "method": "GET",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BusPartAddrDepdntTaxNmbr/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BusPartAddrDepdntTaxNmbr/item",
+  "query_params": [
+    {
+      "name": "BusinessPartner",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "AddressID",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "BPTaxType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "BPTaxType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPTaxType": {
+        "name": "BPTaxType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPTaxNumber": {
+        "name": "BPTaxNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 20,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPTaxLongNumber": {
+        "name": "BPTaxLongNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 60,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AuthorizationGroup": {
+        "name": "AuthorizationGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  }
+}

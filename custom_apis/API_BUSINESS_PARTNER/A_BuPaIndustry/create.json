@@ -1,0 +1,142 @@
+{
+  "description": "Create a new A_BuPaIndustryType record",
+  "method": "POST",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BuPaIndustry",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BuPaIndustry",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "IndustrySector": {
+        "name": "IndustrySector",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IndustrySystemType": {
+        "name": "IndustrySystemType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IsStandardIndustry": {
+        "name": "IsStandardIndustry",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IndustryKeyDescription": {
+        "name": "IndustryKeyDescription",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 100,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "IndustrySector": {
+        "name": "IndustrySector",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IndustrySystemType": {
+        "name": "IndustrySystemType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IsStandardIndustry": {
+        "name": "IsStandardIndustry",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IndustryKeyDescription": {
+        "name": "IndustryKeyDescription",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 100,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": true
+  }
+}

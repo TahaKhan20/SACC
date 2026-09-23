@@ -1,0 +1,141 @@
+{
+  "service": "OP_API_PRODUCT_SRV_0001",
+  "entity_set": "A_ProductPlantQualityMgmt",
+  "entity_type": "A_ProductPlantQualityMgmtType",
+  "keys": [
+    "Product",
+    "Plant"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Product",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 40,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Plant",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "MaximumStoragePeriod",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 5,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "QualityMgmtCtrlKey",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 8,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "MatlQualityAuthorizationGroup",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 6,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "HasPostToInspectionStock",
+      "edm_type": "Edm.Boolean",
+      "python_type": "bool",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "InspLotDocumentationIsRequired",
+      "edm_type": "Edm.Boolean",
+      "python_type": "bool",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "SuplrQualityManagementSystem",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "RecrrgInspIntervalTimeInDays",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 5,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ProductQualityCertificateType",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

@@ -1,0 +1,94 @@
+{
+  "description": "Create a new A_CustAddrDepdntExtIdentifierType record",
+  "method": "POST",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_CustAddrDepdntExtIdentifier",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_CustAddrDepdntExtIdentifier",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "Customer": {
+        "name": "Customer",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerExternalRefID": {
+        "name": "CustomerExternalRefID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 12,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "Customer": {
+        "name": "Customer",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CustomerExternalRefID": {
+        "name": "CustomerExternalRefID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 12,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": true
+  }
+}

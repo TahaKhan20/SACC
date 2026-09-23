@@ -1,0 +1,142 @@
+{
+  "description": "Create a new A_BPAddrDepdntIntlLocNumberType record",
+  "method": "POST",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BPAddrDepdntIntlLocNumber",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BPAddrDepdntIntlLocNumber",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber1": {
+        "name": "InternationalLocationNumber1",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 7,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber2": {
+        "name": "InternationalLocationNumber2",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber3": {
+        "name": "InternationalLocationNumber3",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AddressID": {
+        "name": "AddressID",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber1": {
+        "name": "InternationalLocationNumber1",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 7,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber2": {
+        "name": "InternationalLocationNumber2",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InternationalLocationNumber3": {
+        "name": "InternationalLocationNumber3",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": true
+  }
+}

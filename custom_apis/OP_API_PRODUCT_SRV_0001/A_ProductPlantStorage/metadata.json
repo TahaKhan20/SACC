@@ -1,0 +1,105 @@
+{
+  "service": "OP_API_PRODUCT_SRV_0001",
+  "entity_set": "A_ProductPlantStorage",
+  "entity_type": "A_ProductPlantStorageType",
+  "keys": [
+    "Product",
+    "Plant"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Product",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 40,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Plant",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "InventoryForCycleCountInd",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 1,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ProvisioningServiceLevel",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 1,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CycleCountingIndicatorIsFixed",
+      "edm_type": "Edm.Boolean",
+      "python_type": "bool",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ProdMaximumStoragePeriodUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "WrhsMgmtPtwyAndStkRemovalStrgy",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 1,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

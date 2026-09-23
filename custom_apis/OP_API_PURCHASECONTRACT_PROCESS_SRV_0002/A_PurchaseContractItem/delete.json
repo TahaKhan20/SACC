@@ -1,0 +1,48 @@
+{
+  "description": "Delete a A_PurchaseContractItemType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_PURCHASECONTRACT_PROCESS_SRV_0002/entities/A_PurchaseContractItem/item",
+  "url": "http://localhost:8000/api/services/OP_API_PURCHASECONTRACT_PROCESS_SRV_0002/entities/A_PurchaseContractItem/item",
+  "query_params": [
+    {
+      "name": "PurchaseContract",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseContract",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchaseContractItem",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseContractItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

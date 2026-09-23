@@ -1,0 +1,157 @@
+{
+  "description": "Get a single A_ProductPlantSalesType record by key",
+  "method": "GET",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantSales/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantSales/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Plant",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LoadingGroup": {
+        "name": "LoadingGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ReplacementPartType": {
+        "name": "ReplacementPartType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CapPlanningQuantityInBaseUoM": {
+        "name": "CapPlanningQuantityInBaseUoM",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 13,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProductShippingProcessingTime": {
+        "name": "ProductShippingProcessingTime",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 5,
+        "scale": 2,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "WrkCentersShipgSetupTimeInDays": {
+        "name": "WrkCentersShipgSetupTimeInDays",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 5,
+        "scale": 2,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AvailabilityCheckType": {
+        "name": "AvailabilityCheckType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BaseUnit": {
+        "name": "BaseUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  }
+}

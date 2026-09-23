@@ -1,0 +1,113 @@
+{
+  "service": "OP_PURCHASEORDER_0001",
+  "entity_set": "POItemReturnNextPlant",
+  "entity_type": "ProcNxtPlantsForPurOrdItmRets_Type",
+  "keys": [
+    "PurchaseOrder",
+    "PurchaseOrderItem",
+    "NumberOfNextPlants"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": false,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "PurchaseOrder",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PurchaseOrderItem",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 5,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "NumberOfNextPlants",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "NextPlantForFollowUpActivity",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "SAP__Messages",
+      "edm_type": "Collection(com.sap.gateway.srvd_a2x.api_purchaseorder_2.v0001.SAP__Message)",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": true,
+      "is_navigation": false,
+      "editable": false
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "_PurchaseOrder",
+      "target_type": "PurchaseOrder_Type",
+      "is_collection": false,
+      "nullable": false,
+      "partner": null,
+      "referential_constraints": [
+        {
+          "property": "PurchaseOrder",
+          "referenced_property": "PurchaseOrder"
+        }
+      ]
+    },
+    {
+      "name": "_PurchaseOrderItemReturn",
+      "target_type": "PurchaseOrderItemReturn_Type",
+      "is_collection": false,
+      "nullable": false,
+      "partner": "_PurOrdItmRetProcNxtPlant",
+      "referential_constraints": [
+        {
+          "property": "PurchaseOrder",
+          "referenced_property": "PurchaseOrder"
+        },
+        {
+          "property": "PurchaseOrderItem",
+          "referenced_property": "PurchaseOrderItem"
+        }
+      ]
+    }
+  ]
+}

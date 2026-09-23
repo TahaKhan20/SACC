@@ -1,0 +1,65 @@
+{
+  "description": "Delete a A_CustomerDunningType record by key",
+  "method": "DELETE",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_CustomerDunning/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_CustomerDunning/item",
+  "query_params": [
+    {
+      "name": "Customer",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Customer",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "CompanyCode",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "CompanyCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "DunningArea",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "DunningArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": true
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "service": "OP_API_PRODUCT_SRV_0001",
+  "entity_set": "A_ProductMLAccount",
+  "entity_type": "A_ProductMLAccountType",
+  "keys": [
+    "Product",
+    "ValuationArea",
+    "ValuationType",
+    "CurrencyRole"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Product",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 40,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ValuationArea",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ValuationType",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CurrencyRole",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Currency",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 5,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ProductPriceControl",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 1,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PriceUnitQty",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 5,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "MovingAveragePrice",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 12,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "StandardPrice",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 12,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

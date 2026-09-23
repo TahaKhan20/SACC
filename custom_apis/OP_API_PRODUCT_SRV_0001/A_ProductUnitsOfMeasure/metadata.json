@@ -1,0 +1,258 @@
+{
+  "service": "OP_API_PRODUCT_SRV_0001",
+  "entity_set": "A_ProductUnitsOfMeasure",
+  "entity_type": "A_ProductUnitsOfMeasureType",
+  "keys": [
+    "Product",
+    "AlternativeUnit"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "Product",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 40,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "AlternativeUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "QuantityNumerator",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 5,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "QuantityDenominator",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 5,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "MaterialVolume",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 13,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "VolumeUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "GrossWeight",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 13,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "WeightUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "GlobalTradeItemNumber",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 18,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "GlobalTradeItemNumberCategory",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "UnitSpecificProductLength",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 13,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "UnitSpecificProductWidth",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 13,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "UnitSpecificProductHeight",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 13,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "ProductMeasurementUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "LowerLevelPackagingUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "RemainingVolumeAfterNesting",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 3,
+      "scale": 0,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "MaximumStackingFactor",
+      "edm_type": "Edm.Byte",
+      "python_type": "int",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "CapacityUsage",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 15,
+      "scale": 3,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "BaseUnit",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": 3,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "to_InternationalArticleNumber",
+      "target_type": "A_ProductUnitsOfMeasureEANType",
+      "is_collection": true,
+      "nullable": true,
+      "partner": null,
+      "referential_constraints": []
+    }
+  ]
+}

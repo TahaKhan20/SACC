@@ -1,0 +1,124 @@
+{
+  "description": "Create a new ProcNxtPlantsForPurOrdItmRets_Type record",
+  "method": "POST",
+  "path": "/api/services/OP_PURCHASEORDER_0001/entities/POItemReturnNextPlant",
+  "url": "http://localhost:8000/api/services/OP_PURCHASEORDER_0001/entities/POItemReturnNextPlant",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "PurchaseOrder": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchaseOrderItem": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NumberOfNextPlants": {
+        "name": "NumberOfNextPlants",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NextPlantForFollowUpActivity": {
+        "name": "NextPlantForFollowUpActivity",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": [
+      "NextPlantForFollowUpActivity",
+      "SAP__Messages"
+    ]
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "PurchaseOrder": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchaseOrderItem": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NumberOfNextPlants": {
+        "name": "NumberOfNextPlants",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NextPlantForFollowUpActivity": {
+        "name": "NextPlantForFollowUpActivity",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": [
+      "NextPlantForFollowUpActivity",
+      "SAP__Messages"
+    ]
+  },
+  "capabilities": {
+    "insertable": false
+  }
+}

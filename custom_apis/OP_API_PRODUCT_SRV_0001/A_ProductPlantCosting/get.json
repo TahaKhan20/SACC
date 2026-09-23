@@ -1,0 +1,229 @@
+{
+  "description": "Get a single A_ProductPlantCostingType record by key",
+  "method": "GET",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantCosting/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantCosting/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Plant",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IsCoProduct": {
+        "name": "IsCoProduct",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CostingLotSize": {
+        "name": "CostingLotSize",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 13,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "VarianceKey": {
+        "name": "VarianceKey",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 6,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BaseUnit": {
+        "name": "BaseUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaskListGroupCounter": {
+        "name": "TaskListGroupCounter",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaskListGroup": {
+        "name": "TaskListGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 8,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaskListType": {
+        "name": "TaskListType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CostingProductionVersion": {
+        "name": "CostingProductionVersion",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IsFixedPriceCoProduct": {
+        "name": "IsFixedPriceCoProduct",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CostingSpecialProcurementType": {
+        "name": "CostingSpecialProcurementType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "SourceBOMAlternative": {
+        "name": "SourceBOMAlternative",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProductBOMUsage": {
+        "name": "ProductBOMUsage",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProductIsCostingRelevant": {
+        "name": "ProductIsCostingRelevant",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  }
+}

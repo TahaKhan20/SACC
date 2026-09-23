@@ -1,0 +1,328 @@
+{
+  "description": "Update an existing A_ProductStorageType record by key",
+  "method": "PATCH",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductStorage/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductStorage/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "StorageConditions": {
+        "name": "StorageConditions",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TemperatureConditionInd": {
+        "name": "TemperatureConditionInd",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "HazardousMaterialNumber": {
+        "name": "HazardousMaterialNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NmbrOfGROrGISlipsToPrintQty": {
+        "name": "NmbrOfGROrGISlipsToPrintQty",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 13,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LabelType": {
+        "name": "LabelType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LabelForm": {
+        "name": "LabelForm",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "MinRemainingShelfLife": {
+        "name": "MinRemainingShelfLife",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 4,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ExpirationDate": {
+        "name": "ExpirationDate",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ShelfLifeExpirationDatePeriod": {
+        "name": "ShelfLifeExpirationDatePeriod",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TotalShelfLife": {
+        "name": "TotalShelfLife",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 4,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BaseUnit": {
+        "name": "BaseUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "StorageConditions": {
+        "name": "StorageConditions",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TemperatureConditionInd": {
+        "name": "TemperatureConditionInd",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "HazardousMaterialNumber": {
+        "name": "HazardousMaterialNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "NmbrOfGROrGISlipsToPrintQty": {
+        "name": "NmbrOfGROrGISlipsToPrintQty",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 13,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LabelType": {
+        "name": "LabelType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LabelForm": {
+        "name": "LabelForm",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "MinRemainingShelfLife": {
+        "name": "MinRemainingShelfLife",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 4,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ExpirationDate": {
+        "name": "ExpirationDate",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ShelfLifeExpirationDatePeriod": {
+        "name": "ShelfLifeExpirationDatePeriod",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TotalShelfLife": {
+        "name": "TotalShelfLife",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 4,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BaseUnit": {
+        "name": "BaseUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "updatable": true
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "description": "Get a single PurchaseOrderInvoicingPlan_Type record by key",
+  "method": "GET",
+  "path": "/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderInvoicingPlan/item",
+  "url": "http://localhost:8000/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderInvoicingPlan/item",
+  "query_params": [
+    {
+      "name": "PurchaseOrder",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchaseOrderItem",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "InvoicingPlan",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "InvoicingPlan",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "PurchaseOrder": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchaseOrderItem": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InvoicingPlan": {
+        "name": "InvoicingPlan",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InvoicingPlanType": {
+        "name": "InvoicingPlanType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InvoicingPlanStartDate": {
+        "name": "InvoicingPlanStartDate",
+        "edm_type": "Edm.Date",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InvoicingPlanEndDate": {
+        "name": "InvoicingPlanEndDate",
+        "edm_type": "Edm.Date",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InvoicingPlanNextInvcDateRule": {
+        "name": "InvoicingPlanNextInvcDateRule",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchasingOrganization": {
+        "name": "PurchasingOrganization",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchasingGroup": {
+        "name": "PurchasingGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchaseOrderType": {
+        "name": "PurchaseOrderType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": [
+      "InvoicingPlanType",
+      "InvoicingPlanNextInvcDateRule",
+      "PurchasingOrganization",
+      "PurchasingGroup",
+      "PurchaseOrderType",
+      "Plant",
+      "SAP__Messages"
+    ]
+  }
+}

@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="DocumentService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotation Term="Core.Links">
+        <Collection>
+          <Record>
+            <PropertyValue Property="rel" String="author"/>
+            <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+          </Record>
+        </Collection>
+      </Annotation>
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Documents" EntityType="DocumentService.Documents">
+          <NavigationPropertyBinding Path="file" Target="Files"/>
+          <NavigationPropertyBinding Path="systemInformation" Target="SystemInformation"/>
+          <NavigationPropertyBinding Path="schemaVersion" Target="SchemaVersions"/>
+          <NavigationPropertyBinding Path="documentType" Target="DocumentTypes"/>
+          <NavigationPropertyBinding Path="versions" Target="DocumentsVersions"/>
+          <NavigationPropertyBinding Path="messages" Target="MessageLogs"/>
+          <NavigationPropertyBinding Path="externalURLs" Target="ExternalURLs"/>
+          <NavigationPropertyBinding Path="comments" Target="Comments"/>
+        </EntitySet>
+        <EntitySet Name="DocumentTypes" EntityType="DocumentService.DocumentTypes"/>
+        <EntitySet Name="DocumentsVersions" EntityType="DocumentService.DocumentsVersions">
+          <NavigationPropertyBinding Path="document" Target="Documents"/>
+          <NavigationPropertyBinding Path="entities" Target="DocumentEntities"/>
+        </EntitySet>
+        <EntitySet Name="DocumentEntities" EntityType="DocumentService.DocumentEntities">
+          <NavigationPropertyBinding Path="documentVersion" Target="DocumentsVersions"/>
+          <NavigationPropertyBinding Path="schemaEntity" Target="SchemaEntities"/>
+          <NavigationPropertyBinding Path="parent" Target="DocumentEntities"/>
+          <NavigationPropertyBinding Path="predictedBy" Target="Predictors"/>
+          <NavigationPropertyBinding Path="coordinates" Target="Coordinates"/>
+          <NavigationPropertyBinding Path="attributes" Target="Attributes"/>
+        </EntitySet>
+        <EntitySet Name="SchemaVersions" EntityType="DocumentService.SchemaVersions">
+          <NavigationPropertyBinding Path="entities" Target="SchemaEntities"/>
+        </EntitySet>
+        <EntitySet Name="SchemaEntities" EntityType="DocumentService.SchemaEntities">
+          <NavigationPropertyBinding Path="schemaVersion" Target="SchemaVersions"/>
+          <NavigationPropertyBinding Path="parent" Target="SchemaEntities"/>
+        </EntitySet>
+        <EntitySet Name="Pages" EntityType="DocumentService.Pages">
+          <NavigationPropertyBinding Path="file" Target="Files"/>
+          <NavigationPropertyBinding Path="languages" Target="Pages_languages"/>
+          <NavigationPropertyBinding Path="countries" Target="Pages_countries"/>
+        </EntitySet>
+        <EntitySet Name="Files" EntityType="DocumentService.Files"/>
+        <EntitySet Name="SystemInformation" EntityType="DocumentService.SystemInformation">
+          <NavigationPropertyBinding Path="document" Target="Documents"/>
+        </EntitySet>
+        <EntitySet Name="MessageLogs" EntityType="DocumentService.MessageLogs">
+          <NavigationPropertyBinding Path="document" Target="Documents"/>
+        </EntitySet>
+        <EntitySet Name="ExternalURLs" EntityType="DocumentService.ExternalURLs">
+          <NavigationPropertyBinding Path="document" Target="Documents"/>
+        </EntitySet>
+        <EntitySet Name="Comments" EntityType="DocumentService.Comments">
+          <NavigationPropertyBinding Path="document" Target="Documents"/>
+        </EntitySet>
+        <EntitySet Name="Predictors" EntityType="DocumentService.Predictors">
+          <NavigationPropertyBinding Path="entity" Target="DocumentEntities"/>
+        </EntitySet>
+        <EntitySet Name="Coordinates" EntityType="DocumentService.Coordinates">
+          <NavigationPropertyBinding Path="entity" Target="DocumentEntities"/>
+          <NavigationPropertyBinding Path="page" Target="Pages"/>
+        </EntitySet>
+        <EntitySet Name="Attributes" EntityType="DocumentService.Attributes">
+          <NavigationPropertyBinding Path="entity" Target="DocumentEntities"/>
+        </EntitySet>
+        <EntitySet Name="Pages_languages" EntityType="DocumentService.Pages_languages">
+          <NavigationPropertyBinding Path="up_" Target="Pages"/>
+        </EntitySet>
+        <EntitySet Name="Pages_countries" EntityType="DocumentService.Pages_countries">
+          <NavigationPropertyBinding Path="up_" Target="Pages"/>
+        </EntitySet>
+        <ActionImport Name="markForDeletionByScheduler" Action="DocumentService.markForDeletionByScheduler"/>
+        <ActionImport Name="deleteByScheduler" Action="DocumentService.deleteByScheduler"/>
+      </EntityContainer>
+      <EntityType Name="Documents">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="clientId" Type="Edm.String" MaxLength="128" DefaultValue="default"/>
+        <Property Name="status" Type="Edm.String" MaxLength="16" DefaultValue="open"/>
+        <Property Name="statusSwitchType" Type="Edm.String" MaxLength="16" DefaultValue="auto"/>
+        <Property Name="userAgreement" Type="Edm.Boolean" DefaultValue="false"/>
+        <Property Name="callbackTriggered" Type="Edm.Boolean" DefaultValue="false"/>
+        <NavigationProperty Name="file" Type="DocumentService.Files">
+          <ReferentialConstraint Property="file_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="file_ID" Type="Edm.Guid"/>
+        <Property Name="finishedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <NavigationProperty Name="systemInformation" Type="DocumentService.SystemInformation" Partner="document">
+          <OnDelete Action="Cascade"/>
+          <ReferentialConstraint Property="ID" ReferencedProperty="document_ID"/>
+        </NavigationProperty>
+        <Property Name="schema_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="schemaVersion" Type="DocumentService.SchemaVersions">
+          <ReferentialConstraint Property="schemaVersion_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="schemaVersion_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="documentType" Type="DocumentService.DocumentTypes">
+          <ReferentialConstraint Property="documentType_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="documentType_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="versions" Type="Collection(DocumentService.DocumentsVersions)" Partner="document">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="messages" Type="Collection(DocumentService.MessageLogs)" Partner="document">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="externalURLs" Type="Collection(DocumentService.ExternalURLs)" Partner="document">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="authProperties" Type="Edm.String" DefaultValue=""/>
+        <Property Name="deleted" Type="Edm.Boolean" DefaultValue="false"/>
+        <Property Name="deletedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="deletedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="statusChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="matchedDataset_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="comments" Type="Collection(DocumentService.Comments)" Partner="document">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="DocumentTypes">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="description" Type="Edm.String" MaxLength="500"/>
+        <Property Name="label" Type="Edm.String" MaxLength="100"/>
+        <Property Name="name" Type="Edm.String" MaxLength="128"/>
+        <Property Name="clientId" Type="Edm.String" MaxLength="200"/>
+        <Property Name="generalAvailability" Type="Edm.Boolean" DefaultValue="true"/>
+      </EntityType>
+      <EntityType Name="DocumentsVersions">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <NavigationProperty Name="document" Type="DocumentService.Documents" Partner="versions">
+          <ReferentialConstraint Property="document_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="document_ID" Type="Edm.Guid"/>
+        <Property Name="version" Type="Edm.Int32" DefaultValue="0"/>
+        <NavigationProperty Name="entities" Type="Collection(DocumentService.DocumentEntities)" Partner="documentVersion">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="DocumentEntities">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="documentVersion" Type="DocumentService.DocumentsVersions" Partner="entities">
+          <ReferentialConstraint Property="documentVersion_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="documentVersion_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="schemaEntity" Type="DocumentService.SchemaEntities">
+          <ReferentialConstraint Property="schemaEntity_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="schemaEntity_ID" Type="Edm.Guid"/>
+        <Property Name="name" Type="Edm.String" MaxLength="128"/>
+        <NavigationProperty Name="parent" Type="DocumentService.DocumentEntities">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="dateValue" Type="Edm.Date"/>
+        <Property Name="stringValue" Type="Edm.String"/>
+        <Property Name="numberValue" Type="Edm.Double"/>
+        <Property Name="rawValue" Type="Edm.String"/>
+        <Property Name="confidence" Type="Edm.Decimal" Precision="16" Scale="15"/>
+        <Property Name="occurrence" Type="Edm.Int32"/>
+        <Property Name="type" Type="Edm.String"/>
+        <Property Name="dataType" Type="Edm.String" DefaultValue="String"/>
+        <Property Name="signedOff" Type="Edm.Boolean" DefaultValue="false"/>
+        <NavigationProperty Name="predictedBy" Type="DocumentService.Predictors" Partner="entity">
+          <OnDelete Action="Cascade"/>
+          <ReferentialConstraint Property="ID" ReferencedProperty="entity_ID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="coordinates" Type="Collection(DocumentService.Coordinates)" Partner="entity">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="attributes" Type="Collection(DocumentService.Attributes)" Partner="entity">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="entityExternalURL" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="SchemaVersions">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="description" Type="Edm.String" MaxLength="500"/>
+        <Property Name="label" Type="Edm.String" MaxLength="100"/>
+        <Property Name="isActive" Type="Edm.Boolean" DefaultValue="false"/>
+        <Property Name="processingInstructions" Type="Edm.String" MaxLength="1000"/>
+        <Property Name="schema_ID" Type="Edm.Guid"/>
+        <Property Name="version" Type="Edm.Int32" DefaultValue="1"/>
+        <Property Name="retentionPeriod" Type="Edm.Int32"/>
+        <Property Name="outboundChannels" Type="DocumentService.cds_Map"/>
+        <Property Name="autoConfirm" Type="Edm.Boolean" DefaultValue="false"/>
+        <NavigationProperty Name="entities" Type="Collection(DocumentService.SchemaEntities)" Partner="schemaVersion">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="processingMode" Type="Edm.String" DefaultValue="text"/>
+        <Property Name="uiConfigurations_ID" Type="Edm.Guid"/>
+        <Property Name="useGlobalConfigurations" Type="Edm.Boolean" DefaultValue="true"/>
+        <Property Name="configurations" Type="DocumentService.cds_Map"/>
+      </EntityType>
+      <EntityType Name="SchemaEntities">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="description" Type="Edm.String" MaxLength="500"/>
+        <Property Name="label" Type="Edm.String" MaxLength="100"/>
+        <Property Name="name" Type="Edm.String" MaxLength="128"/>
+        <Property Name="processingInstructions" Type="Edm.String" MaxLength="1000"/>
+        <NavigationProperty Name="schemaVersion" Type="DocumentService.SchemaVersions" Partner="entities">
+          <ReferentialConstraint Property="schemaVersion_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="schemaVersion_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="parent" Type="DocumentService.SchemaEntities">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="minimumOccurrence" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="maximumOccurrence" Type="Edm.Int32"/>
+        <Property Name="mandatory" Type="Edm.Boolean" DefaultValue="false"/>
+        <Property Name="authorizationEnabled" Type="Edm.Boolean" DefaultValue="false"/>
+        <Property Name="type" Type="Edm.String"/>
+        <Property Name="processorType" Type="Edm.String" DefaultValue="Auto"/>
+        <Property Name="referenceEntity" Type="Edm.String" MaxLength="100"/>
+        <Property Name="autoConfirmThreshold" Type="Edm.Int32"/>
+        <Property Name="allowedValues_ID" Type="Edm.Guid"/>
+        <Property Name="dataType" Type="Edm.String" DefaultValue="String"/>
+        <Property Name="validation" Type="DocumentService.cds_Map"/>
+        <Property Name="uiConfigurations_ID" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="Pages">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="file" Type="DocumentService.Files">
+          <ReferentialConstraint Property="file_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="file_ID" Type="Edm.Guid"/>
+        <Property Name="pageNumber" Type="Edm.Int32"/>
+        <Property Name="path" Type="Edm.String"/>
+        <Property Name="image" Type="Edm.Binary"/>
+        <Property Name="text" Type="Edm.String"/>
+        <Property Name="hOCR" Type="DocumentService.cds_Map"/>
+        <NavigationProperty Name="languages" Type="Collection(DocumentService.Pages_languages)" Partner="up_">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="countries" Type="Collection(DocumentService.Pages_countries)" Partner="up_">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Files">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="255"/>
+      </EntityType>
+      <EntityType Name="SystemInformation">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="document" Type="DocumentService.Documents" Partner="systemInformation">
+          <ReferentialConstraint Property="document_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="document_ID" Type="Edm.Guid"/>
+        <Property Name="systemVersion" Type="Edm.String" MaxLength="32"/>
+        <Property Name="ocrName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="ocrVersion" Type="Edm.String" MaxLength="32"/>
+      </EntityType>
+      <EntityType Name="MessageLogs">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="code" Type="Edm.String" MaxLength="64"/>
+        <Property Name="level" Type="Edm.String" MaxLength="16"/>
+        <Property Name="message" Type="Edm.String"/>
+        <Property Name="details" Type="Edm.String"/>
+        <Property Name="errorGuid" Type="Edm.String" MaxLength="64"/>
+        <NavigationProperty Name="document" Type="DocumentService.Documents" Partner="messages">
+          <ReferentialConstraint Property="document_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="document_ID" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="ExternalURLs">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="url" Type="Edm.String"/>
+        <Property Name="urlTarget" Type="Edm.String"/>
+        <NavigationProperty Name="document" Type="DocumentService.Documents" Partner="externalURLs">
+          <ReferentialConstraint Property="document_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="document_ID" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="Comments">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <NavigationProperty Name="document" Type="DocumentService.Documents" Partner="comments">
+          <ReferentialConstraint Property="document_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="document_ID" Type="Edm.Guid"/>
+        <Property Name="reason" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="description" Type="Edm.String" MaxLength="128"/>
+        <Property Name="event" Type="Edm.String" MaxLength="16" DefaultValue="None"/>
+      </EntityType>
+      <EntityType Name="Predictors">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="entity" Type="DocumentService.DocumentEntities" Partner="predictedBy">
+          <ReferentialConstraint Property="entity_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="entity_ID" Type="Edm.Guid"/>
+        <Property Name="name" Type="Edm.String" MaxLength="128"/>
+        <Property Name="modelName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="modelVersion" Type="Edm.String" MaxLength="32"/>
+      </EntityType>
+      <EntityType Name="Coordinates">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="entity" Type="DocumentService.DocumentEntities" Partner="coordinates">
+          <ReferentialConstraint Property="entity_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="entity_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="page" Type="DocumentService.Pages">
+          <ReferentialConstraint Property="page_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="page_ID" Type="Edm.Guid"/>
+        <Property Name="x" Type="Edm.Decimal" Precision="16" Scale="15"/>
+        <Property Name="y" Type="Edm.Decimal" Precision="16" Scale="15"/>
+        <Property Name="w" Type="Edm.Decimal" Precision="16" Scale="15"/>
+        <Property Name="h" Type="Edm.Decimal" Precision="16" Scale="15"/>
+      </EntityType>
+      <EntityType Name="Attributes">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="entity" Type="DocumentService.DocumentEntities" Partner="attributes">
+          <ReferentialConstraint Property="entity_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="entity_ID" Type="Edm.Guid"/>
+        <Property Name="name" Type="Edm.String" MaxLength="128"/>
+        <Property Name="value" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Pages_languages">
+        <Key>
+          <PropertyRef Name="up__ID"/>
+          <PropertyRef Name="code_code"/>
+        </Key>
+        <NavigationProperty Name="up_" Type="DocumentService.Pages" Nullable="false" Partner="languages">
+          <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="up__ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="code_code" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="confidence" Type="Edm.Decimal" Precision="16" Scale="15"/>
+      </EntityType>
+      <EntityType Name="Pages_countries">
+        <Key>
+          <PropertyRef Name="up__ID"/>
+          <PropertyRef Name="code_code"/>
+        </Key>
+        <NavigationProperty Name="up_" Type="DocumentService.Pages" Nullable="false" Partner="countries">
+          <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="up__ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="code_code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="confidence" Type="Edm.Decimal" Precision="16" Scale="15"/>
+      </EntityType>
+      <ComplexType Name="CommentDetail">
+        <Property Name="reason" Type="Edm.Int32"/>
+        <Property Name="description" Type="Edm.String" MaxLength="128"/>
+      </ComplexType>
+      <ComplexType Name="cds_Map" OpenType="true"/>
+      <Action Name="markForDeletion" IsBound="true">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <ReturnType Type="Edm.String"/>
+      </Action>
+      <Action Name="version0" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="reviewNeeded" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <Parameter Name="comments" Type="Collection(DocumentService.CommentDetail)" Nullable="true"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="confirmed" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <Parameter Name="useForInstantLearning" Type="Edm.Boolean"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="rejected" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <Parameter Name="comments" Type="Collection(DocumentService.CommentDetail)" Nullable="true"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="failed" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="obsolete" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="markShippingDocumentInProgress" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="DocumentService.Documents"/>
+        <Parameter Name="ID" Type="Edm.Guid"/>
+        <ReturnType Type="DocumentService.Documents"/>
+      </Action>
+      <Action Name="markForDeletionByScheduler" IsBound="false"/>
+      <Action Name="deleteByScheduler" IsBound="false"/>
+      <Annotations Target="DocumentService.Documents/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/status">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="open"/>
+              <PropertyValue Property="Value" String="open"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="inProgress"/>
+              <PropertyValue Property="Value" String="inProgress"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="reviewNeeded"/>
+              <PropertyValue Property="Value" String="reviewNeeded"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="readyForPosting"/>
+              <PropertyValue Property="Value" String="readyForPosting"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="confirmed"/>
+              <PropertyValue Property="Value" String="confirmed"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="obsolete"/>
+              <PropertyValue Property="Value" String="obsolete"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="failed"/>
+              <PropertyValue Property="Value" String="failed"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="rejected"/>
+              <PropertyValue Property="Value" String="rejected"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/statusSwitchType">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="auto"/>
+              <PropertyValue Property="Value" String="auto"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="manual"/>
+              <PropertyValue Property="Value" String="manual"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/callbackTriggered">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/deleted">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/deletedAt">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/deletedBy">
+        <Annotation Term="Common.Label" String="{i18n>UserID}"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Documents/statusChangedAt">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentTypes/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentTypes/name">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentTypes/clientId">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentsVersions/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentsVersions/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentsVersions/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentsVersions/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentsVersions/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentEntities/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentEntities/type">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Category"/>
+              <PropertyValue Property="Value" String="Category"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Group"/>
+              <PropertyValue Property="Value" String="Group"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Table"/>
+              <PropertyValue Property="Value" String="Table"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Field"/>
+              <PropertyValue Property="Value" String="Field"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.DocumentEntities/dataType">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Number"/>
+              <PropertyValue Property="Value" String="Number"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="String"/>
+              <PropertyValue Property="Value" String="String"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Date"/>
+              <PropertyValue Property="Value" String="Date"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="CountryRegion"/>
+              <PropertyValue Property="Value" String="CountryRegion"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Currency"/>
+              <PropertyValue Property="Value" String="Currency"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/isActive">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/version">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaVersions/processingMode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="text"/>
+              <PropertyValue Property="Value" String="text"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="image"/>
+              <PropertyValue Property="Value" String="image"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="textAndImage"/>
+              <PropertyValue Property="Value" String="textAndImage"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaEntities/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaEntities/name">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaEntities/type">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Category"/>
+              <PropertyValue Property="Value" String="Category"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Group"/>
+              <PropertyValue Property="Value" String="Group"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Table"/>
+              <PropertyValue Property="Value" String="Table"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Field"/>
+              <PropertyValue Property="Value" String="Field"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaEntities/processorType">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Auto"/>
+              <PropertyValue Property="Value" String="Auto"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Manual"/>
+              <PropertyValue Property="Value" String="Manual"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Input"/>
+              <PropertyValue Property="Value" String="Input"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.SchemaEntities/dataType">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Number"/>
+              <PropertyValue Property="Value" String="Number"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="String"/>
+              <PropertyValue Property="Value" String="String"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Date"/>
+              <PropertyValue Property="Value" String="Date"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="CountryRegion"/>
+              <PropertyValue Property="Value" String="CountryRegion"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Currency"/>
+              <PropertyValue Property="Value" String="Currency"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.Pages/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.EntityContainer/Files">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.Files/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.CommentDetail/reason">
+        <Annotation Term="Validation.Minimum" Int="0"/>
+        <Annotation Term="Validation.Maximum" Int="9"/>
+      </Annotations>
+      <Annotations Target="DocumentService.SystemInformation/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.MessageLogs/level">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="warning"/>
+              <PropertyValue Property="Value" String="warning"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="error"/>
+              <PropertyValue Property="Value" String="error"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.ExternalURLs/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.ExternalURLs/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.ExternalURLs/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.ExternalURLs/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.ExternalURLs/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/reason">
+        <Annotation Term="Validation.Minimum" Int="0"/>
+        <Annotation Term="Validation.Maximum" Int="9"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Comments/event">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Approved"/>
+              <PropertyValue Property="Value" String="Approved"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Rejected"/>
+              <PropertyValue Property="Value" String="Rejected"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="ReviewRequired"/>
+              <PropertyValue Property="Value" String="ReviewRequired"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" String="None"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="UserAssigned"/>
+              <PropertyValue Property="Value" String="UserAssigned"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="DocumentService.Predictors/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Coordinates/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="DocumentService.Attributes/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

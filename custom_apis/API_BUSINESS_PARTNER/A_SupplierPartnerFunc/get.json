@@ -1,0 +1,249 @@
+{
+  "description": "Get a single A_SupplierPartnerFuncType record by key",
+  "method": "GET",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_SupplierPartnerFunc/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_SupplierPartnerFunc/item",
+  "query_params": [
+    {
+      "name": "Supplier",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Supplier",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchasingOrganization",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchasingOrganization",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "SupplierSubrange",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "SupplierSubrange",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 6,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Plant",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PartnerFunction",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PartnerFunction",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PartnerCounter",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PartnerCounter",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "Supplier": {
+        "name": "Supplier",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchasingOrganization": {
+        "name": "PurchasingOrganization",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "SupplierSubrange": {
+        "name": "SupplierSubrange",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 6,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PartnerFunction": {
+        "name": "PartnerFunction",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PartnerCounter": {
+        "name": "PartnerCounter",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DefaultPartner": {
+        "name": "DefaultPartner",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CreationDate": {
+        "name": "CreationDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CreatedByUser": {
+        "name": "CreatedByUser",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 12,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ReferenceSupplier": {
+        "name": "ReferenceSupplier",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "AuthorizationGroup": {
+        "name": "AuthorizationGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  }
+}

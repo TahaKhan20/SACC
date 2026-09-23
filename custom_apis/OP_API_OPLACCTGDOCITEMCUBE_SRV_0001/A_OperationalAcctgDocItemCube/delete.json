@@ -1,0 +1,82 @@
+{
+  "description": "Delete a A_OperationalAcctgDocItemCubeType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_OPLACCTGDOCITEMCUBE_SRV_0001/entities/A_OperationalAcctgDocItemCube/item",
+  "url": "http://localhost:8000/api/services/OP_API_OPLACCTGDOCITEMCUBE_SRV_0001/entities/A_OperationalAcctgDocItemCube/item",
+  "query_params": [
+    {
+      "name": "CompanyCode",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "CompanyCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "FiscalYear",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "FiscalYear",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "AccountingDocument",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "AccountingDocument",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "AccountingDocumentItem",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "AccountingDocumentItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

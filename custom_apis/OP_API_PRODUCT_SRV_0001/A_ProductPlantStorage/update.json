@@ -1,0 +1,225 @@
+{
+  "description": "Update an existing A_ProductPlantStorageType record by key",
+  "method": "PATCH",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantStorage/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductPlantStorage/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Plant",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InventoryForCycleCountInd": {
+        "name": "InventoryForCycleCountInd",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProvisioningServiceLevel": {
+        "name": "ProvisioningServiceLevel",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CycleCountingIndicatorIsFixed": {
+        "name": "CycleCountingIndicatorIsFixed",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProdMaximumStoragePeriodUnit": {
+        "name": "ProdMaximumStoragePeriodUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "WrhsMgmtPtwyAndStkRemovalStrgy": {
+        "name": "WrhsMgmtPtwyAndStkRemovalStrgy",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Plant": {
+        "name": "Plant",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "InventoryForCycleCountInd": {
+        "name": "InventoryForCycleCountInd",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProvisioningServiceLevel": {
+        "name": "ProvisioningServiceLevel",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CycleCountingIndicatorIsFixed": {
+        "name": "CycleCountingIndicatorIsFixed",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProdMaximumStoragePeriodUnit": {
+        "name": "ProdMaximumStoragePeriodUnit",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "WrhsMgmtPtwyAndStkRemovalStrgy": {
+        "name": "WrhsMgmtPtwyAndStkRemovalStrgy",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "updatable": true
+  }
+}

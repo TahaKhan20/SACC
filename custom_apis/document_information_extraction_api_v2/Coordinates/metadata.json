@@ -1,0 +1,131 @@
+{
+  "service": "document_information_extraction_api_v2",
+  "entity_set": "Coordinates",
+  "entity_type": "Coordinates",
+  "keys": [
+    "ID"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "ID",
+      "edm_type": "Edm.Guid",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "entity_ID",
+      "edm_type": "Edm.Guid",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "page_ID",
+      "edm_type": "Edm.Guid",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "x",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 16,
+      "scale": 15,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "y",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 16,
+      "scale": 15,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "w",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 16,
+      "scale": 15,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "h",
+      "edm_type": "Edm.Decimal",
+      "python_type": "float",
+      "nullable": true,
+      "max_length": null,
+      "precision": 16,
+      "scale": 15,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "entity",
+      "target_type": "DocumentEntities",
+      "is_collection": false,
+      "nullable": true,
+      "partner": "coordinates",
+      "referential_constraints": [
+        {
+          "property": "entity_ID",
+          "referenced_property": "ID"
+        }
+      ]
+    },
+    {
+      "name": "page",
+      "target_type": "Pages",
+      "is_collection": false,
+      "nullable": true,
+      "partner": null,
+      "referential_constraints": [
+        {
+          "property": "page_ID",
+          "referenced_property": "ID"
+        }
+      ]
+    }
+  ]
+}

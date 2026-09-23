@@ -1,0 +1,246 @@
+{
+  "description": "Get a single A_ProductValuationAccountType record by key",
+  "method": "GET",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductValuationAccount/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductValuationAccount/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValuationArea",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValuationArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValuationType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValuationType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationArea": {
+        "name": "ValuationArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationType": {
+        "name": "ValuationType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CommercialPrice1InCoCodeCrcy": {
+        "name": "CommercialPrice1InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CommercialPrice2InCoCodeCrcy": {
+        "name": "CommercialPrice2InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CommercialPrice3InCoCodeCrcy": {
+        "name": "CommercialPrice3InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "DevaluationYearCount": {
+        "name": "DevaluationYearCount",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "FutureEvaluatedAmountValue": {
+        "name": "FutureEvaluatedAmountValue",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "FuturePriceValidityStartDate": {
+        "name": "FuturePriceValidityStartDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "IsLIFOAndFIFORelevant": {
+        "name": "IsLIFOAndFIFORelevant",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": true,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "LIFOValuationPoolNumber": {
+        "name": "LIFOValuationPoolNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaxPricel1InCoCodeCrcy": {
+        "name": "TaxPricel1InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaxPrice2InCoCodeCrcy": {
+        "name": "TaxPrice2InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "TaxPrice3InCoCodeCrcy": {
+        "name": "TaxPrice3InCoCodeCrcy",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Currency": {
+        "name": "Currency",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  }
+}

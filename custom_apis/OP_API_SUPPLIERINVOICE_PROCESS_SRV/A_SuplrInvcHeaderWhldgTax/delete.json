@@ -1,0 +1,65 @@
+{
+  "description": "Delete a A_SuplrInvcHeaderWhldgTaxType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_SUPPLIERINVOICE_PROCESS_SRV/entities/A_SuplrInvcHeaderWhldgTax/item",
+  "url": "http://localhost:8000/api/services/OP_API_SUPPLIERINVOICE_PROCESS_SRV/entities/A_SuplrInvcHeaderWhldgTax/item",
+  "query_params": [
+    {
+      "name": "SupplierInvoice",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "SupplierInvoice",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "FiscalYear",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "FiscalYear",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "WithholdingTaxType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "WithholdingTaxType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

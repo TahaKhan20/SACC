@@ -1,0 +1,315 @@
+{
+  "description": "Get a single POItemValueAddedService_Type record by key",
+  "method": "GET",
+  "path": "/api/services/OP_PURCHASEORDER_0001/entities/POItemValueAddedService/item",
+  "url": "http://localhost:8000/api/services/OP_PURCHASEORDER_0001/entities/POItemValueAddedService/item",
+  "query_params": [
+    {
+      "name": "PurchaseOrder",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchaseOrderItem",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValueAddedServiceType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValueAddedServiceType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValueAddedSubServiceType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValueAddedSubServiceType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "object",
+    "properties": {
+      "PurchaseOrder": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PurchaseOrderItem": {
+        "name": "PurchaseOrderItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceType": {
+        "name": "ValueAddedServiceType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedSubServiceType": {
+        "name": "ValueAddedSubServiceType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceProduct": {
+        "name": "ValueAddedServiceProduct",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcHasToBeOrdered": {
+        "name": "ValAddedSrvcHasToBeOrdered",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": false,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcIncrement": {
+        "name": "ValAddedSrvcIncrement",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceChargeCode": {
+        "name": "ValueAddedServiceChargeCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 3,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcIsCreatedManually": {
+        "name": "ValAddedSrvcIsCreatedManually",
+        "edm_type": "Edm.Boolean",
+        "python_type": "bool",
+        "nullable": false,
+        "max_length": null,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceDeletionCode": {
+        "name": "ValueAddedServiceDeletionCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcItemNumberInMM": {
+        "name": "ValAddedSrvcItemNumberInMM",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceText1": {
+        "name": "ValueAddedServiceText1",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 20,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceText2": {
+        "name": "ValueAddedServiceText2",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 20,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceText3": {
+        "name": "ValueAddedServiceText3",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 20,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValueAddedServiceLongText": {
+        "name": "ValueAddedServiceLongText",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 132,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcTransactionNumber": {
+        "name": "ValAddedSrvcTransactionNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcItemGroup": {
+        "name": "ValAddedSrvcItemGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValAddedSrvcItemNumber": {
+        "name": "ValAddedSrvcItemNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": [
+      "ValueAddedServiceProduct",
+      "ValAddedSrvcHasToBeOrdered",
+      "ValAddedSrvcIncrement",
+      "ValueAddedServiceChargeCode",
+      "ValAddedSrvcIsCreatedManually",
+      "ValueAddedServiceDeletionCode",
+      "ValAddedSrvcItemNumberInMM",
+      "ValueAddedServiceText1",
+      "ValueAddedServiceText2",
+      "ValueAddedServiceText3",
+      "ValueAddedServiceLongText",
+      "ValAddedSrvcTransactionNumber",
+      "ValAddedSrvcItemGroup",
+      "ValAddedSrvcItemNumber",
+      "SAP__Messages"
+    ]
+  }
+}

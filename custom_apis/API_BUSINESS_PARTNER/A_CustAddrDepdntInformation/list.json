@@ -1,0 +1,117 @@
+{
+  "description": "List records from A_CustAddrDepdntInformation",
+  "method": "GET",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_CustAddrDepdntInformation",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_CustAddrDepdntInformation",
+  "query_params": [
+    {
+      "name": "$top",
+      "type": "query",
+      "required": false,
+      "default": 100,
+      "schema": {
+        "python_type": "int"
+      }
+    },
+    {
+      "name": "$skip",
+      "type": "query",
+      "required": false,
+      "default": 0,
+      "schema": {
+        "python_type": "int"
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "Customer": {
+          "name": "Customer",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 10,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "AddressID": {
+          "name": "AddressID",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 10,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "ExpressTrainStationName": {
+          "name": "ExpressTrainStationName",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 25,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "TrainStationName": {
+          "name": "TrainStationName",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 25,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "CityCode": {
+          "name": "CityCode",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 4,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "County": {
+          "name": "County",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 3,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        }
+      },
+      "required": []
+    }
+  },
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  }
+}

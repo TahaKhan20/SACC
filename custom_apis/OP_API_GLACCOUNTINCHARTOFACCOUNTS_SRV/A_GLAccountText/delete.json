@@ -1,0 +1,65 @@
+{
+  "description": "Delete a A_GLAccountTextType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_GLACCOUNTINCHARTOFACCOUNTS_SRV/entities/A_GLAccountText/item",
+  "url": "http://localhost:8000/api/services/OP_API_GLACCOUNTINCHARTOFACCOUNTS_SRV/entities/A_GLAccountText/item",
+  "query_params": [
+    {
+      "name": "ChartOfAccounts",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ChartOfAccounts",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "GLAccount",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "GLAccount",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Language",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Language",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

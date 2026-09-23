@@ -1,0 +1,134 @@
+{
+  "service": "document_information_extraction_api_v2",
+  "entity_set": "Pages",
+  "entity_type": "Pages",
+  "keys": [
+    "ID"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": true,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "ID",
+      "edm_type": "Edm.Guid",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "file_ID",
+      "edm_type": "Edm.Guid",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "pageNumber",
+      "edm_type": "Edm.Int32",
+      "python_type": "int",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "path",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "image",
+      "edm_type": "Edm.Binary",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "text",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "hOCR",
+      "edm_type": "DocumentService.cds_Map",
+      "python_type": "str",
+      "nullable": true,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "file",
+      "target_type": "Files",
+      "is_collection": false,
+      "nullable": true,
+      "partner": null,
+      "referential_constraints": [
+        {
+          "property": "file_ID",
+          "referenced_property": "ID"
+        }
+      ]
+    },
+    {
+      "name": "languages",
+      "target_type": "Pages_languages",
+      "is_collection": true,
+      "nullable": true,
+      "partner": "up_",
+      "referential_constraints": []
+    },
+    {
+      "name": "countries",
+      "target_type": "Pages_countries",
+      "is_collection": true,
+      "nullable": true,
+      "partner": "up_",
+      "referential_constraints": []
+    }
+  ]
+}

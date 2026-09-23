@@ -1,0 +1,65 @@
+{
+  "description": "Delete a PurchaseOrderNote_Type record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderNote/item",
+  "url": "http://localhost:8000/api/services/OP_PURCHASEORDER_0001/entities/PurchaseOrderNote/item",
+  "query_params": [
+    {
+      "name": "PurchaseOrder",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseOrder",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "TextObjectType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "TextObjectType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "Language",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Language",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}

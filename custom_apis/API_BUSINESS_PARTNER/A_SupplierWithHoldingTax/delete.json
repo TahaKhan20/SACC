@@ -1,0 +1,65 @@
+{
+  "description": "Delete a A_SupplierWithHoldingTaxType record by key",
+  "method": "DELETE",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_SupplierWithHoldingTax/item",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_SupplierWithHoldingTax/item",
+  "query_params": [
+    {
+      "name": "Supplier",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Supplier",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "CompanyCode",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "CompanyCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "WithholdingTaxType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "WithholdingTaxType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": true
+  }
+}

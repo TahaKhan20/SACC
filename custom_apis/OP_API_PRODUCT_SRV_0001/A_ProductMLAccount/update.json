@@ -1,0 +1,307 @@
+{
+  "description": "Update an existing A_ProductMLAccountType record by key",
+  "method": "PATCH",
+  "path": "/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductMLAccount/item",
+  "url": "http://localhost:8000/api/services/OP_API_PRODUCT_SRV_0001/entities/A_ProductMLAccount/item",
+  "query_params": [
+    {
+      "name": "Product",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValuationArea",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValuationArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ValuationType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ValuationType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "CurrencyRole",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "CurrencyRole",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationArea": {
+        "name": "ValuationArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationType": {
+        "name": "ValuationType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CurrencyRole": {
+        "name": "CurrencyRole",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Currency": {
+        "name": "Currency",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProductPriceControl": {
+        "name": "ProductPriceControl",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PriceUnitQty": {
+        "name": "PriceUnitQty",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 5,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "MovingAveragePrice": {
+        "name": "MovingAveragePrice",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "StandardPrice": {
+        "name": "StandardPrice",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "Product": {
+        "name": "Product",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 40,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationArea": {
+        "name": "ValuationArea",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ValuationType": {
+        "name": "ValuationType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "CurrencyRole": {
+        "name": "CurrencyRole",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "Currency": {
+        "name": "Currency",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ProductPriceControl": {
+        "name": "ProductPriceControl",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 1,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "PriceUnitQty": {
+        "name": "PriceUnitQty",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 5,
+        "scale": 0,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "MovingAveragePrice": {
+        "name": "MovingAveragePrice",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "StandardPrice": {
+        "name": "StandardPrice",
+        "edm_type": "Edm.Decimal",
+        "python_type": "float",
+        "nullable": true,
+        "max_length": null,
+        "precision": 12,
+        "scale": 3,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "updatable": true
+  }
+}

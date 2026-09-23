@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generic SAP EDMX API Generator</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --success: #1e8e3e;
+      --danger: #d93025;
+      --warning: #f9ab00;
+      --bg: #f4f6fa;
+      --card: #ffffff;
+      --border: #dadce0;
+      --text: #202124;
+      --muted: #5f6368;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+      color: white;
+      padding: 20px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header small {
+      opacity: 0.9;
+      display: block;
+      margin-top: 6px;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 12px;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      padding: 18px;
+      border: 1px solid #eef1f4;
+    }
+
+    .card h2, .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 16px; }
+    .grid { display: grid; gap: 12px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    input, select, textarea, button {
+      font: inherit;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(26,115,232,0.12);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { background: white; color: var(--text); border: 1px solid var(--border); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-success { background: var(--success); color: white; }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-blue { background: #e8f0fe; color: var(--primary); }
+    .badge-green { background: #e6f4ea; color: var(--success); }
+    .badge-red { background: #fce8e6; color: var(--danger); }
+    .badge-amber { background: #fff7e0; color: #8d5a00; }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eef1f4;
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f8f9fb;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      position: sticky;
+      top: 0;
+    }
+
+    tr.clickable:hover {
+      background: #f6faff;
+      cursor: pointer;
+    }
+
+    .kvs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .kv {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fafbfd;
+    }
+
+    .kv label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 18px;
+      text-align: center;
+    }
+
+    pre {
+      background: #101828;
+      color: #d1e9ff;
+      padding: 14px;
+      border-radius: 8px;
+      overflow: auto;
+      font-size: 12px;
+    }
+
+    .toast-area {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+      min-width: 260px;
+    }
+
+    .toast.info { background: var(--primary); }
+    .toast.success { background: var(--success); }
+    .toast.error { background: var(--danger); }
+
+    @media (max-width: 1100px) {
+      .page { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>Generic SAP EDMX API Generator</h1>
+      <small>Parse any SAP EDMX file, inspect metadata and capabilities, then work with generic CRUD endpoints and a dynamic UI.</small>
+    </div>
+    <div class="header-controls">
+      <div class="form-group">
+        <label>API Base URL</label>
+        <input id="baseUrl" value="http://127.0.0.1:8000" />
+      </div>
+      <button class="btn btn-outline" onclick="reloadServices()">Reload EDMX Files</button>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="stack">
+      <div class="card">
+        <h2>Service Selection</h2>
+        <div class="grid">
+          <div class="form-group">
+            <label>EDMX Service</label>
+            <select id="serviceSelect"></select>
+          </div>
+          <div class="form-group">
+            <label>Entity Set</label>
+            <select id="entitySelect"></select>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:12px;">
+          <button class="btn btn-primary" onclick="loadMetadata()">Load Metadata</button>
+          <button class="btn btn-outline" onclick="loadList()">Load Records</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Service Summary</h3>
+        <div id="serviceSummary" class="empty">Load a service to see namespace, version, entity count and parser output.</div>
+      </div>
+
+      <div class="card">
+        <h3>Entity Summary</h3>
+        <div id="entitySummary" class="empty">Select an entity set to inspect its fields and capabilities.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="inspect">Inspect</button>
+        <button class="tab-btn" data-tab="list">List</button>
+        <button class="tab-btn" data-tab="create">Create</button>
+        <button class="tab-btn" data-tab="update">Update</button>
+        <button class="tab-btn" data-tab="delete">Delete</button>
+        <button class="tab-btn" data-tab="crud" style="border-color:var(--warning);color:var(--warning);">CRUD Tester</button>
+      </div>
+
+      <div id="tab-inspect" class="tab-panel active">
+        <div class="stack">
+          <div>
+            <h2>Entity Metadata</h2>
+            <div id="metadataTable"></div>
+          </div>
+          <div>
+            <h3>Raw Metadata</h3>
+            <pre id="rawMetadata">{}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-list" class="tab-panel">
+        <div class="stack">
+          <div>
+            <h2>List Records</h2>
+            <p class="hint">Filters are generated from the EDMX field list. String fields use contains matching; numeric and boolean fields use exact matching.</p>
+            <div id="filterForm" class="grid grid-4"></div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-primary" onclick="loadList()">Search</button>
+              <button class="btn btn-outline" onclick="resetFilters()">Reset Filters</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr id="listHead"></tr></thead>
+              <tbody id="listBody"><tr><td class="empty">No records loaded yet.</td></tr></tbody>
+            </table>
+          </div>
+          <div>
+            <h3>Selected Record</h3>
+            <pre id="selectedRecord">{}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-create" class="tab-panel">
+        <h2>Create Record</h2>
+        <div id="createForm" class="grid grid-3"></div>
+        <div class="btn-row" style="margin-top:12px;">
+          <button class="btn btn-success" onclick="submitCreate()">Create Record</button>
+          <button class="btn btn-outline" onclick="prefillCreateDefaults()">Fill Defaults</button>
+        </div>
+      </div>
+
+      <div id="tab-update" class="tab-panel">
+        <div class="stack">
+          <div>
+            <h2>Record Keys</h2>
+            <div id="updateKeysForm" class="grid grid-4"></div>
+          </div>
+          <div>
+            <h2>Update Fields</h2>
+            <div id="updateForm" class="grid grid-3"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="loadItemIntoUpdate()">Load Item</button>
+            <button class="btn btn-success" onclick="submitUpdate()">Update Record</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-delete" class="tab-panel">
+        <div class="stack">
+          <div>
+            <h2>Delete by Keys</h2>
+            <div id="deleteKeysForm" class="grid grid-4"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-danger" onclick="submitDelete()">Delete Record</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3: CRUD Tester -->
+      <div id="tab-crud" class="tab-panel">
+        <div class="stack">
+          <div>
+            <h2>Generic CRUD Tester</h2>
+            <p class="hint">Point at any API endpoint to perform List, Get, Create, Update, and Delete operations. Select a loaded service + entity or enter a custom URL.</p>
+          </div>
+
+          <!-- Endpoint Configuration -->
+          <div class="card" style="border:2px solid var(--warning);">
+            <h3 style="margin-top:0;">Endpoint Configuration</h3>
+            <div class="grid grid-2">
+              <div class="form-group">
+                <label>Quick Select (loaded service)</label>
+                <select id="crudServiceSelect" onchange="crudFillEndpoint()">
+                  <option value="">-- Custom URL --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Entity Set</label>
+                <select id="crudEntitySelect" onchange="crudFillEndpoint()"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Endpoint URL</label>
+              <input id="crudEndpoint" placeholder="http://127.0.0.1:8000/api/services/SERVICE/entities/ENTITY" />
+              <div class="hint">Full URL to the entity’s list endpoint. The tester appends /item?keys for get/update/delete.</div>
+            </div>
+          </div>
+
+          <!-- CRUD Operation Selector -->
+          <div class="btn-row">
+            <button class="btn btn-outline" onclick="crudSetOp('list')" id="crudOpList" style="border-color:var(--primary);color:var(--primary);font-weight:700;">LIST</button>
+            <button class="btn btn-outline" onclick="crudSetOp('get')" id="crudOpGet">GET</button>
+            <button class="btn btn-outline" onclick="crudSetOp('create')" id="crudOpCreate">CREATE</button>
+            <button class="btn btn-outline" onclick="crudSetOp('update')" id="crudOpUpdate">UPDATE</button>
+            <button class="btn btn-outline" onclick="crudSetOp('delete')" id="crudOpDelete">DELETE</button>
+          </div>
+
+          <!-- LIST panel -->
+          <div id="crudPanelList" class="card">
+            <h3>List Records</h3>
+            <div class="grid grid-3" id="crudListFilters"></div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-primary" onclick="crudExecList()">Fetch Records</button>
+            </div>
+            <div class="table-wrap" style="margin-top:12px;max-height:400px;overflow:auto;">
+              <table>
+                <thead><tr id="crudListHead"></tr></thead>
+                <tbody id="crudListBody"><tr><td class="empty">No results yet.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- GET panel -->
+          <div id="crudPanelGet" class="card" style="display:none;">
+            <h3>Get Single Record</h3>
+            <div class="grid grid-4" id="crudGetKeys"></div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-primary" onclick="crudExecGet()">Fetch Record</button>
+            </div>
+          </div>
+
+          <!-- CREATE panel -->
+          <div id="crudPanelCreate" class="card" style="display:none;">
+            <h3>Create Record</h3>
+            <div class="grid grid-3" id="crudCreateFields"></div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-success" onclick="crudExecCreate()">Create</button>
+            </div>
+          </div>
+
+          <!-- UPDATE panel -->
+          <div id="crudPanelUpdate" class="card" style="display:none;">
+            <h3>Update Record</h3>
+            <div>
+              <h4>Keys</h4>
+              <div class="grid grid-4" id="crudUpdateKeys"></div>
+            </div>
+            <div style="margin-top:12px;">
+              <h4>Fields</h4>
+              <div class="grid grid-3" id="crudUpdateFields"></div>
+            </div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-primary" onclick="crudExecUpdate()">Update</button>
+            </div>
+          </div>
+
+          <!-- DELETE panel -->
+          <div id="crudPanelDelete" class="card" style="display:none;">
+            <h3>Delete Record</h3>
+            <div class="grid grid-4" id="crudDeleteKeys"></div>
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn btn-danger" onclick="crudExecDelete()">Delete</button>
+            </div>
+          </div>
+
+          <!-- Response -->
+          <div>
+            <h3>Response</h3>
+            <pre id="crudResponse" style="max-height:400px;overflow:auto;">{}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-area" id="toastArea"></div>
+
+  <script>
+    const state = {
+      services: [],
+      metadata: null,
+      entity: null,
+      selectedRecord: null,
+      lastRecords: [],
+    };
+
+    const BASE = () => document.getElementById('baseUrl').value.replace(/\/+$/, '');
+
+    function toast(message, type = 'info') {
+      const area = document.getElementById('toastArea');
+      const div = document.createElement('div');
+      div.className = `toast ${type}`;
+      div.textContent = message;
+      area.appendChild(div);
+      setTimeout(() => div.remove(), 3500);
+    }
+
+    function esc(value) {
+      if (value === null || value === undefined) return '';
+      const div = document.createElement('div');
+      div.textContent = String(value);
+      return div.innerHTML;
+    }
+
+    async function api(path, opts = {}) {
+      const response = await fetch(BASE() + path, {
+        headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
+        ...opts,
+      });
+      if (response.status === 204) return null;
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || JSON.stringify(data));
+      }
+      return data;
+    }
+
+    function currentServiceName() {
+      return document.getElementById('serviceSelect').value;
+    }
+
+    function currentEntityName() {
+      return document.getElementById('entitySelect').value;
+    }
+
+    function currentEntity() {
+      if (!state.metadata) return null;
+      return state.metadata.entity_sets.find(entity => entity.entity_set === currentEntityName()) || null;
+    }
+
+    function editableProps(entity) {
+      if (!entity) return [];
+      return entity.properties.filter(p => p.editable && !p.is_collection && p.name !== 'SAP__Messages');
+    }
+
+    function keyProps(entity) {
+      if (!entity) return [];
+      return editableProps(entity).filter(p => entity.keys.includes(p.name));
+    }
+
+    function nonKeyProps(entity) {
+      if (!entity) return [];
+      return editableProps(entity).filter(p => !entity.keys.includes(p.name));
+    }
+
+    function inputType(prop) {
+      const type = prop.edm_type;
+      if (type === 'Edm.Boolean') return 'checkbox';
+      if (['Edm.Byte','Edm.SByte','Edm.Int16','Edm.Int32','Edm.Int64','Edm.Decimal','Edm.Double','Edm.Single'].includes(type)) return 'number';
+      if (type === 'Edm.Date') return 'date';
+      if (type === 'Edm.DateTimeOffset') return 'datetime-local';
+      if (type === 'Edm.TimeOfDay') return 'time';
+      return 'text';
+    }
+
+    function defaultValue(prop) {
+      const type = prop.edm_type;
+      if (type === 'Edm.Boolean') return false;
+      if (['Edm.Byte','Edm.SByte','Edm.Int16','Edm.Int32','Edm.Int64','Edm.Decimal','Edm.Double','Edm.Single'].includes(type)) return 0;
+      return '';
+    }
+
+    function buildInput(prop, prefix, value = null, required = false) {
+      const type = inputType(prop);
+      const id = `${prefix}_${prop.name}`;
+      const attrs = [];
+      if (prop.max_length) attrs.push(`maxlength="${prop.max_length}"`);
+      if (type === 'number') attrs.push('step="any"');
+      if (required) attrs.push('required');
+
+      let inputHtml;
+      if (type === 'checkbox') {
+        inputHtml = `<input id="${id}" type="checkbox" ${value ? 'checked' : ''} />`;
+      } else {
+        const safeValue = value === null || value === undefined ? '' : esc(value);
+        inputHtml = `<input id="${id}" type="${type}" value="${safeValue}" ${attrs.join(' ')} />`;
+      }
+
+      return `
+        <div class="form-group">
+          <label>${esc(prop.name)}</label>
+          ${inputHtml}
+          <div class="hint">${esc(prop.edm_type)}${prop.nullable ? '' : ' • required'}${prop.max_length ? ' • max ' + prop.max_length : ''}</div>
+        </div>
+      `;
+    }
+
+    function readInput(prop, prefix) {
+      const el = document.getElementById(`${prefix}_${prop.name}`);
+      if (!el) return undefined;
+      if (el.type === 'checkbox') return el.checked;
+      if (el.type === 'number') return el.value === '' ? null : Number(el.value);
+      return el.value === '' ? null : el.value;
+    }
+
+    function buildForm(containerId, props, prefix, options = {}) {
+      const container = document.getElementById(containerId);
+      if (!props.length) {
+        container.innerHTML = '<div class="empty">No fields available.</div>';
+        return;
+      }
+      container.innerHTML = props.map(prop => buildInput(prop, prefix, options.values?.[prop.name] ?? null, options.required?.includes(prop.name))).join('');
+    }
+
+    function collectPayload(props, prefix, includeEmpty = false) {
+      const payload = {};
+      props.forEach(prop => {
+        const value = readInput(prop, prefix);
+        if (value === null || value === '' || value === undefined) {
+          if (includeEmpty) payload[prop.name] = value;
+          return;
+        }
+        payload[prop.name] = value;
+      });
+      return payload;
+    }
+
+    function renderServiceSummary() {
+      const div = document.getElementById('serviceSummary');
+      if (!state.metadata) {
+        div.className = 'empty';
+        div.textContent = 'Load a service to see namespace, version, entity count and parser output.';
+        return;
+      }
+      div.className = '';
+      div.innerHTML = `
+        <div class="kvs">
+          <div class="kv"><label>Name</label><span>${esc(state.metadata.name)}</span></div>
+          <div class="kv"><label>Namespace</label><span>${esc(state.metadata.namespace)}</span></div>
+          <div class="kv"><label>Alias</label><span>${esc(state.metadata.alias || '')}</span></div>
+          <div class="kv"><label>Version</label><span>${esc(state.metadata.version || '')}</span></div>
+          <div class="kv"><label>File</label><span>${esc(state.metadata.file_name)}</span></div>
+          <div class="kv"><label>Entity Sets</label><span>${state.metadata.entity_sets.length}</span></div>
+        </div>
+      `;
+    }
+
+    function renderEntitySummary() {
+      const entity = currentEntity();
+      const div = document.getElementById('entitySummary');
+      state.entity = entity;
+      if (!entity) {
+        div.className = 'empty';
+        div.textContent = 'Select an entity set to inspect its fields and capabilities.';
+        return;
+      }
+
+      const badge = (label, ok) => `<span class="badge ${ok ? 'badge-green' : 'badge-red'}">${label}: ${ok ? 'yes' : 'no'}</span>`;
+      div.className = '';
+      div.innerHTML = `
+        <div class="kvs">
+          <div class="kv"><label>Entity Set</label><span>${esc(entity.entity_set)}</span></div>
+          <div class="kv"><label>Entity Type</label><span>${esc(entity.entity_type)}</span></div>
+          <div class="kv"><label>Keys</label><span>${esc(entity.keys.join(', '))}</span></div>
+          <div class="kv"><label>Properties</label><span>${entity.properties.length}</span></div>
+          <div class="kv"><label>Navigation</label><span>${entity.navigation_properties.length}</span></div>
+        </div>
+        <div class="badge-row">
+          ${badge('Readable', entity.capabilities.readable)}
+          ${badge('Insertable', entity.capabilities.insertable)}
+          ${badge('Updatable', entity.capabilities.updatable)}
+          ${badge('Deletable', entity.capabilities.deletable)}
+          ${badge('Filterable', entity.capabilities.filterable)}
+          <span class="badge badge-amber">Top supported: ${entity.capabilities.top_supported}</span>
+          <span class="badge badge-amber">Skip supported: ${entity.capabilities.skip_supported}</span>
+        </div>
+      `;
+    }
+
+    function renderMetadataPanel() {
+      const entity = currentEntity();
+      const wrap = document.getElementById('metadataTable');
+      document.getElementById('rawMetadata').textContent = JSON.stringify(entity || {}, null, 2);
+      if (!entity) {
+        wrap.innerHTML = '<div class="empty">No metadata loaded.</div>';
+        return;
+      }
+
+      const navRows = entity.navigation_properties.map(nav => `
+        <tr>
+          <td>${esc(nav.name)}</td>
+          <td>${esc(nav.target_type)}</td>
+          <td>${nav.is_collection ? 'collection' : 'single'}</td>
+          <td>${nav.partner ? esc(nav.partner) : ''}</td>
+        </tr>
+      `).join('') || '<tr><td colspan="4" class="empty">No navigation properties.</td></tr>';
+
+      wrap.innerHTML = `
+        <div class="stack">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Nullable</th>
+                  <th>Key</th>
+                  <th>Editable</th>
+                  <th>Max Length</th>
+                  <th>Precision</th>
+                  <th>Scale</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${entity.properties.map(prop => `
+                  <tr>
+                    <td>${esc(prop.name)}</td>
+                    <td>${esc(prop.edm_type)}</td>
+                    <td>${prop.nullable}</td>
+                    <td>${entity.keys.includes(prop.name)}</td>
+                    <td>${prop.editable}</td>
+                    <td>${prop.max_length ?? ''}</td>
+                    <td>${prop.precision ?? ''}</td>
+                    <td>${prop.scale ?? ''}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3>Navigation Properties</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Name</th><th>Target Type</th><th>Cardinality</th><th>Partner</th></tr></thead>
+                <tbody>${navRows}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGeneratedForms() {
+      const entity = currentEntity();
+      if (!entity) return;
+
+      const allEditable = editableProps(entity);
+      const keys = keyProps(entity);
+      const nonKeys = nonKeyProps(entity);
+      const required = allEditable.filter(p => entity.keys.includes(p.name) || !p.nullable).map(p => p.name);
+
+      buildForm('createForm', allEditable, 'create', { required });
+      buildForm('updateKeysForm', keys, 'updateKey', { required: keys.map(k => k.name) });
+      buildForm('updateForm', nonKeys, 'update', {});
+      buildForm('deleteKeysForm', keys, 'deleteKey', { required: keys.map(k => k.name) });
+
+      const filterProps = allEditable.slice(0, 10);
+      buildForm('filterForm', filterProps, 'filter', {});
+      renderListTable([]);
+    }
+
+    function renderListTable(records) {
+      const entity = currentEntity();
+      const head = document.getElementById('listHead');
+      const body = document.getElementById('listBody');
+      state.lastRecords = records;
+      if (!entity) {
+        head.innerHTML = '';
+        body.innerHTML = '<tr><td class="empty">No entity selected.</td></tr>';
+        return;
+      }
+
+      const visibleProps = editableProps(entity).slice(0, 12);
+      head.innerHTML = visibleProps.map(prop => `<th>${esc(prop.name)}</th>`).join('');
+
+      if (!records.length) {
+        body.innerHTML = `<tr><td colspan="${Math.max(visibleProps.length, 1)}" class="empty">No records found.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = records.map((record, index) => `
+        <tr class="clickable" data-index="${index}">
+          ${visibleProps.map(prop => `<td>${esc(record[prop.name] ?? '')}</td>`).join('')}
+        </tr>
+      `).join('');
+
+      body.querySelectorAll('tr.clickable').forEach(row => {
+        row.addEventListener('click', () => {
+          const index = Number(row.dataset.index);
+          selectRecord(state.lastRecords[index]);
+        });
+      });
+    }
+
+    function fillFormFromRecord(prefix, props, record) {
+      props.forEach(prop => {
+        const el = document.getElementById(`${prefix}_${prop.name}`);
+        if (!el) return;
+        const value = record?.[prop.name];
+        if (el.type === 'checkbox') {
+          el.checked = Boolean(value);
+        } else {
+          el.value = value ?? '';
+        }
+      });
+    }
+
+    function selectRecord(record) {
+      state.selectedRecord = record;
+      document.getElementById('selectedRecord').textContent = JSON.stringify(record, null, 2);
+      const entity = currentEntity();
+      if (!entity) return;
+      fillFormFromRecord('create', editableProps(entity), record);
+      fillFormFromRecord('updateKey', keyProps(entity), record);
+      fillFormFromRecord('update', nonKeyProps(entity), record);
+      fillFormFromRecord('deleteKey', keyProps(entity), record);
+      toast('Record loaded into update and delete forms.', 'info');
+    }
+
+    function buildQueryFromKeys(entity, prefix) {
+      const params = new URLSearchParams();
+      keyProps(entity).forEach(prop => {
+        const value = readInput(prop, prefix);
+        if (value !== null && value !== '' && value !== undefined) {
+          params.set(prop.name, value);
+        }
+      });
+      return params.toString();
+    }
+
+    function prefillCreateDefaults() {
+      const entity = currentEntity();
+      if (!entity) return;
+      editableProps(entity).forEach(prop => {
+        const el = document.getElementById(`create_${prop.name}`);
+        if (!el) return;
+        const value = defaultValue(prop);
+        if (el.type === 'checkbox') el.checked = Boolean(value);
+        else el.value = value;
+      });
+    }
+
+    function resetFilters() {
+      const entity = currentEntity();
+      if (!entity) return;
+      editableProps(entity).slice(0, 10).forEach(prop => {
+        const el = document.getElementById(`filter_${prop.name}`);
+        if (!el) return;
+        if (el.type === 'checkbox') el.checked = false;
+        else el.value = '';
+      });
+    }
+
+    async function loadServices() {
+      try {
+        state.services = await api('/api/services');
+        const select = document.getElementById('serviceSelect');
+        if (!state.services.length) {
+          select.innerHTML = '<option value="">No EDMX files found in /apis</option>';
+          return;
+        }
+        select.innerHTML = state.services.map(service => `<option value="${esc(service.name)}">${esc(service.name)} (${esc(service.file_name)})</option>`).join('');
+        await loadMetadata();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function reloadServices() {
+      try {
+        await api('/api/services/reload', { method: 'POST' });
+        toast('EDMX files reloaded.', 'success');
+        await loadServices();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function loadMetadata() {
+      const service = currentServiceName();
+      if (!service) return;
+      try {
+        state.metadata = await api(`/api/services/${encodeURIComponent(service)}/metadata`);
+        const entitySelect = document.getElementById('entitySelect');
+        entitySelect.innerHTML = state.metadata.entity_sets.map(entity => `<option value="${esc(entity.entity_set)}">${esc(entity.entity_set)}</option>`).join('');
+        renderServiceSummary();
+        renderEntitySummary();
+        renderMetadataPanel();
+        renderGeneratedForms();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function loadList() {
+      const service = currentServiceName();
+      const entity = currentEntity();
+      if (!service || !entity) return;
+      try {
+        const params = new URLSearchParams();
+        params.set('$top', '100');
+        editableProps(entity).slice(0, 10).forEach(prop => {
+          const value = readInput(prop, 'filter');
+          if (value !== null && value !== '' && value !== undefined) {
+            params.set(prop.name, value);
+          }
+        });
+        const data = await api(`/api/services/${encodeURIComponent(service)}/entities/${encodeURIComponent(entity.entity_set)}?${params.toString()}`);
+        renderListTable(data);
+        if (data.length) {
+          document.getElementById('selectedRecord').textContent = JSON.stringify(data[0], null, 2);
+        }
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function loadItemIntoUpdate() {
+      const service = currentServiceName();
+      const entity = currentEntity();
+      if (!service || !entity) return;
+      try {
+        const query = buildQueryFromKeys(entity, 'updateKey');
+        const record = await api(`/api/services/${encodeURIComponent(service)}/entities/${encodeURIComponent(entity.entity_set)}/item?${query}`);
+        selectRecord(record);
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function submitCreate() {
+      const service = currentServiceName();
+      const entity = currentEntity();
+      if (!service || !entity) return;
+      try {
+        const payload = collectPayload(editableProps(entity), 'create');
+        const created = await api(`/api/services/${encodeURIComponent(service)}/entities/${encodeURIComponent(entity.entity_set)}`, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        });
+        toast('Record created successfully.', 'success');
+        selectRecord(created);
+        await loadList();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function submitUpdate() {
+      const service = currentServiceName();
+      const entity = currentEntity();
+      if (!service || !entity) return;
+      try {
+        const query = buildQueryFromKeys(entity, 'updateKey');
+        const payload = collectPayload(nonKeyProps(entity), 'update');
+        const updated = await api(`/api/services/${encodeURIComponent(service)}/entities/${encodeURIComponent(entity.entity_set)}/item?${query}`, {
+          method: 'PATCH',
+          body: JSON.stringify(payload),
+        });
+        toast('Record updated successfully.', 'success');
+        selectRecord(updated);
+        await loadList();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    async function submitDelete() {
+      const service = currentServiceName();
+      const entity = currentEntity();
+      if (!service || !entity) return;
+      try {
+        const query = buildQueryFromKeys(entity, 'deleteKey');
+        await api(`/api/services/${encodeURIComponent(service)}/entities/${encodeURIComponent(entity.entity_set)}/item?${query}`, {
+          method: 'DELETE',
+        });
+        toast('Record deleted successfully.', 'success');
+        document.getElementById('selectedRecord').textContent = '{}';
+        await loadList();
+      } catch (error) {
+        toast(error.message, 'error');
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(`tab-${button.dataset.tab}`).classList.add('active');
+      });
+    });
+
+    document.getElementById('serviceSelect').addEventListener('change', () => {
+      loadMetadata();
+    });
+
+    document.getElementById('entitySelect').addEventListener('change', () => {
+      renderEntitySummary();
+      renderMetadataPanel();
+      renderGeneratedForms();
+    });
+
+    // ===================================================================
+    // Part 3: CRUD Tester Logic
+    // ===================================================================
+
+    const crudState = {
+      op: 'list',
+      metadata: null,
+      entity: null,
+    };
+
+    function crudSetOp(op) {
+      crudState.op = op;
+      ['list','get','create','update','delete'].forEach(o => {
+        const btn = document.getElementById('crudOp' + o.charAt(0).toUpperCase() + o.slice(1));
+        const panel = document.getElementById('crudPanel' + o.charAt(0).toUpperCase() + o.slice(1));
+        if (btn) {
+          btn.style.borderColor = o === op ? 'var(--primary)' : '';
+          btn.style.color = o === op ? 'var(--primary)' : '';
+          btn.style.fontWeight = o === op ? '700' : '';
+        }
+        if (panel) panel.style.display = o === op ? '' : 'none';
+      });
+    }
+
+    function crudPopulateServiceSelect() {
+      const sel = document.getElementById('crudServiceSelect');
+      sel.innerHTML = '<option value="">-- Custom URL --</option>' +
+        state.services.map(s => `<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');
+    }
+
+    async function crudFillEndpoint() {
+      const svcName = document.getElementById('crudServiceSelect').value;
+      const entitySel = document.getElementById('crudEntitySelect');
+      const endpointInput = document.getElementById('crudEndpoint');
+
+      if (!svcName) {
+        entitySel.innerHTML = '<option value="">N/A</option>';
+        crudState.metadata = null;
+        crudState.entity = null;
+        crudBuildForms();
+        return;
+      }
+
+      try {
+        crudState.metadata = await api(`/api/services/${encodeURIComponent(svcName)}/metadata`);
+        entitySel.innerHTML = crudState.metadata.entity_sets.map(e =>
+          `<option value="${esc(e.entity_set)}">${esc(e.entity_set)}</option>`
+        ).join('');
+
+        const entityName = entitySel.value;
+        crudState.entity = crudState.metadata.entity_sets.find(e => e.entity_set === entityName) || null;
+        endpointInput.value = `${BASE()}/api/services/${encodeURIComponent(svcName)}/entities/${encodeURIComponent(entityName)}`;
+        crudBuildForms();
+      } catch (err) {
+        toast(err.message, 'error');
+      }
+    }
+
+    function crudEditableProps() {
+      if (!crudState.entity) return [];
+      return crudState.entity.properties.filter(p => p.editable && !p.is_collection && p.name !== 'SAP__Messages');
+    }
+
+    function crudKeyProps() {
+      if (!crudState.entity) return [];
+      return crudEditableProps().filter(p => crudState.entity.keys.includes(p.name));
+    }
+
+    function crudNonKeyProps() {
+      if (!crudState.entity) return [];
+      return crudEditableProps().filter(p => !crudState.entity.keys.includes(p.name));
+    }
+
+    function crudBuildForms() {
+      const entity = crudState.entity;
+      if (!entity) {
+        ['crudListFilters','crudGetKeys','crudCreateFields','crudUpdateKeys','crudUpdateFields','crudDeleteKeys'].forEach(id => {
+          document.getElementById(id).innerHTML = '<div class="empty">Select a service and entity first, or enter a custom URL.</div>';
+        });
+        return;
+      }
+
+      const allEditable = crudEditableProps();
+      const keys = crudKeyProps();
+      const nonKeys = crudNonKeyProps();
+
+      // List filters (first 8 fields)
+      buildForm('crudListFilters', allEditable.slice(0, 8), 'crudFilter', {});
+      // Get keys
+      buildForm('crudGetKeys', keys, 'crudGetKey', { required: keys.map(k => k.name) });
+      // Create fields
+      buildForm('crudCreateFields', allEditable, 'crudCreate', {});
+      // Update keys + fields
+      buildForm('crudUpdateKeys', keys, 'crudUpdKey', { required: keys.map(k => k.name) });
+      buildForm('crudUpdateFields', nonKeys, 'crudUpd', {});
+      // Delete keys
+      buildForm('crudDeleteKeys', keys, 'crudDelKey', { required: keys.map(k => k.name) });
+    }
+
+    function crudEndpointUrl() {
+      return document.getElementById('crudEndpoint').value.replace(/\/+$/, '');
+    }
+
+    async function crudExecList() {
+      const endpoint = crudEndpointUrl();
+      if (!endpoint) { toast('Enter an endpoint URL', 'error'); return; }
+
+      const filters = {};
+      if (crudState.entity) {
+        crudEditableProps().slice(0, 8).forEach(prop => {
+          const val = readInput(prop, 'crudFilter');
+          if (val !== null && val !== '' && val !== undefined) filters[prop.name] = val;
+        });
+      }
+
+      try {
+        const result = await api('/crud/list', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint, filters, top: 100, skip: 0 }),
+        });
+        document.getElementById('crudResponse').textContent = JSON.stringify(result, null, 2);
+        crudRenderListTable(Array.isArray(result) ? result : []);
+        toast(`Fetched ${Array.isArray(result) ? result.length : 0} records`, 'success');
+      } catch (err) {
+        document.getElementById('crudResponse').textContent = JSON.stringify({ error: err.message }, null, 2);
+        toast(err.message, 'error');
+      }
+    }
+
+    function crudRenderListTable(records) {
+      const head = document.getElementById('crudListHead');
+      const body = document.getElementById('crudListBody');
+      if (!records.length) {
+        head.innerHTML = '';
+        body.innerHTML = '<tr><td class="empty">No records found.</td></tr>';
+        return;
+      }
+      const cols = Object.keys(records[0]).slice(0, 12);
+      head.innerHTML = cols.map(c => `<th>${esc(c)}</th>`).join('');
+      body.innerHTML = records.map(r =>
+        `<tr class="clickable" onclick='crudSelectRecord(${JSON.stringify(r).replace(/'/g, "&#39;")})'>${cols.map(c => `<td>${esc(r[c] ?? '')}</td>`).join('')}</tr>`
+      ).join('');
+    }
+
+    function crudSelectRecord(record) {
+      document.getElementById('crudResponse').textContent = JSON.stringify(record, null, 2);
+      if (!crudState.entity) return;
+
+      const keys = crudKeyProps();
+      const nonKeys = crudNonKeyProps();
+      const allEditable = crudEditableProps();
+
+      // Fill into all CRUD forms
+      fillFormFromRecord('crudGetKey', keys, record);
+      fillFormFromRecord('crudCreate', allEditable, record);
+      fillFormFromRecord('crudUpdKey', keys, record);
+      fillFormFromRecord('crudUpd', nonKeys, record);
+      fillFormFromRecord('crudDelKey', keys, record);
+      toast('Record loaded into CRUD forms.', 'info');
+    }
+
+    async function crudExecGet() {
+      const endpoint = crudEndpointUrl();
+      if (!endpoint) { toast('Enter an endpoint URL', 'error'); return; }
+
+      const keys = {};
+      crudKeyProps().forEach(prop => {
+        const val = readInput(prop, 'crudGetKey');
+        if (val !== null && val !== '' && val !== undefined) keys[prop.name] = val;
+      });
+
+      try {
+        const result = await api('/crud/get', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint, keys }),
+        });
+        document.getElementById('crudResponse').textContent = JSON.stringify(result, null, 2);
+        toast('Record fetched.', 'success');
+      } catch (err) {
+        document.getElementById('crudResponse').textContent = JSON.stringify({ error: err.message }, null, 2);
+        toast(err.message, 'error');
+      }
+    }
+
+    async function crudExecCreate() {
+      const endpoint = crudEndpointUrl();
+      if (!endpoint) { toast('Enter an endpoint URL', 'error'); return; }
+
+      const payload = collectPayload(crudEditableProps(), 'crudCreate');
+
+      try {
+        const result = await api('/crud/create', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint, payload }),
+        });
+        document.getElementById('crudResponse').textContent = JSON.stringify(result, null, 2);
+        toast('Record created.', 'success');
+      } catch (err) {
+        document.getElementById('crudResponse').textContent = JSON.stringify({ error: err.message }, null, 2);
+        toast(err.message, 'error');
+      }
+    }
+
+    async function crudExecUpdate() {
+      const endpoint = crudEndpointUrl();
+      if (!endpoint) { toast('Enter an endpoint URL', 'error'); return; }
+
+      const keys = {};
+      crudKeyProps().forEach(prop => {
+        const val = readInput(prop, 'crudUpdKey');
+        if (val !== null && val !== '' && val !== undefined) keys[prop.name] = val;
+      });
+      const payload = collectPayload(crudNonKeyProps(), 'crudUpd');
+
+      try {
+        const result = await api('/crud/update', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint, keys, payload }),
+        });
+        document.getElementById('crudResponse').textContent = JSON.stringify(result, null, 2);
+        toast('Record updated.', 'success');
+      } catch (err) {
+        document.getElementById('crudResponse').textContent = JSON.stringify({ error: err.message }, null, 2);
+        toast(err.message, 'error');
+      }
+    }
+
+    async function crudExecDelete() {
+      const endpoint = crudEndpointUrl();
+      if (!endpoint) { toast('Enter an endpoint URL', 'error'); return; }
+
+      const keys = {};
+      crudKeyProps().forEach(prop => {
+        const val = readInput(prop, 'crudDelKey');
+        if (val !== null && val !== '' && val !== undefined) keys[prop.name] = val;
+      });
+
+      try {
+        const result = await api('/crud/delete', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint, keys }),
+        });
+        document.getElementById('crudResponse').textContent = JSON.stringify(result, null, 2);
+        toast('Record deleted.', 'success');
+      } catch (err) {
+        document.getElementById('crudResponse').textContent = JSON.stringify({ error: err.message }, null, 2);
+        toast(err.message, 'error');
+      }
+    }
+
+    // Override loadServices to also populate CRUD tester selects
+    const _origLoadServices = loadServices;
+    loadServices = async function() {
+      await _origLoadServices();
+      crudPopulateServiceSelect();
+    };
+
+    // Populate CRUD entity select when entity changes
+    document.getElementById('crudEntitySelect').addEventListener('change', () => {
+      const svcName = document.getElementById('crudServiceSelect').value;
+      const entityName = document.getElementById('crudEntitySelect').value;
+      if (crudState.metadata) {
+        crudState.entity = crudState.metadata.entity_sets.find(e => e.entity_set === entityName) || null;
+        document.getElementById('crudEndpoint').value =
+          `${BASE()}/api/services/${encodeURIComponent(svcName)}/entities/${encodeURIComponent(entityName)}`;
+        crudBuildForms();
+      }
+    });
+
+    loadServices();
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+{
+  "service": "OP_PURCHASEORDER_0001",
+  "entity_set": "PurchaseOrderItemNote",
+  "entity_type": "PurchaseOrderItemNote_Type",
+  "keys": [
+    "PurchaseOrder",
+    "PurchaseOrderItem",
+    "TextObjectType",
+    "Language"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": false,
+    "updatable": false,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "PurchaseOrder",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PurchaseOrderItem",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 5,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "TextObjectType",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Language",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PlainLongText",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PurchaseOrderItemUniqueID",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 15,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "_PurchaseOrder",
+      "target_type": "PurchaseOrder_Type",
+      "is_collection": false,
+      "nullable": false,
+      "partner": null,
+      "referential_constraints": [
+        {
+          "property": "PurchaseOrder",
+          "referenced_property": "PurchaseOrder"
+        }
+      ]
+    },
+    {
+      "name": "_PurchaseOrderItem",
+      "target_type": "PurchaseOrderItem_Type",
+      "is_collection": false,
+      "nullable": false,
+      "partner": "_PurchaseOrderItemNote",
+      "referential_constraints": [
+        {
+          "property": "PurchaseOrder",
+          "referenced_property": "PurchaseOrder"
+        },
+        {
+          "property": "PurchaseOrderItem",
+          "referenced_property": "PurchaseOrderItem"
+        }
+      ]
+    }
+  ]
+}

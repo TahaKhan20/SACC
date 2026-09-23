@@ -1,0 +1,190 @@
+{
+  "description": "Create a new A_BPEmploymentType record",
+  "method": "POST",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BPEmployment",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BPEmployment",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentStartDate": {
+        "name": "BPEmploymentStartDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentEndDate": {
+        "name": "BPEmploymentEndDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentStatus": {
+        "name": "BPEmploymentStatus",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusPartEmplrIndstryCode": {
+        "name": "BusPartEmplrIndstryCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerEmployerName": {
+        "name": "BusinessPartnerEmployerName",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 35,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerOccupationGroup": {
+        "name": "BusinessPartnerOccupationGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "BusinessPartner": {
+        "name": "BusinessPartner",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentStartDate": {
+        "name": "BPEmploymentStartDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentEndDate": {
+        "name": "BPEmploymentEndDate",
+        "edm_type": "Edm.DateTime",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": null,
+        "precision": 0,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BPEmploymentStatus": {
+        "name": "BPEmploymentStatus",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusPartEmplrIndstryCode": {
+        "name": "BusPartEmplrIndstryCode",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerEmployerName": {
+        "name": "BusinessPartnerEmployerName",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 35,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "BusinessPartnerOccupationGroup": {
+        "name": "BusinessPartnerOccupationGroup",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": true,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": true
+  }
+}

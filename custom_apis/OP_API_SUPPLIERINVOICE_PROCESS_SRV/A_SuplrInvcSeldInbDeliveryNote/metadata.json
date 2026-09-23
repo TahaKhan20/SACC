@@ -1,0 +1,58 @@
+{
+  "service": "OP_API_SUPPLIERINVOICE_PROCESS_SRV",
+  "entity_set": "A_SuplrInvcSeldInbDeliveryNote",
+  "entity_type": "A_SuplrInvcSeldInbDeliveryNoteType",
+  "keys": [
+    "SupplierInvoice",
+    "FiscalYear",
+    "InboundDeliveryNote"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": false,
+    "updatable": false,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "SupplierInvoice",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "FiscalYear",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "InboundDeliveryNote",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 16,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": []
+}

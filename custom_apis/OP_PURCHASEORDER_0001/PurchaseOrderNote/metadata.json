@@ -1,0 +1,84 @@
+{
+  "service": "OP_PURCHASEORDER_0001",
+  "entity_set": "PurchaseOrderNote",
+  "entity_type": "PurchaseOrderNote_Type",
+  "keys": [
+    "PurchaseOrder",
+    "TextObjectType",
+    "Language"
+  ],
+  "capabilities": {
+    "readable": true,
+    "insertable": false,
+    "updatable": false,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  },
+  "fields": [
+    {
+      "name": "PurchaseOrder",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 10,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "TextObjectType",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 4,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "Language",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": 2,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    },
+    {
+      "name": "PlainLongText",
+      "edm_type": "Edm.String",
+      "python_type": "str",
+      "nullable": false,
+      "max_length": null,
+      "precision": null,
+      "scale": null,
+      "is_collection": false,
+      "is_navigation": false,
+      "editable": true
+    }
+  ],
+  "navigation_properties": [
+    {
+      "name": "_PurchaseOrder",
+      "target_type": "PurchaseOrder_Type",
+      "is_collection": false,
+      "nullable": false,
+      "partner": "_PurchaseOrderNote",
+      "referential_constraints": [
+        {
+          "property": "PurchaseOrder",
+          "referenced_property": "PurchaseOrder"
+        }
+      ]
+    }
+  ]
+}

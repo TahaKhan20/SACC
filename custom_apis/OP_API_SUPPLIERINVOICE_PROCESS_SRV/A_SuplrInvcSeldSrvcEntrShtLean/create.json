@@ -1,0 +1,118 @@
+{
+  "description": "Create a new A_SuplrInvcSeldSrvcEntrShtLeanType record",
+  "method": "POST",
+  "path": "/api/services/OP_API_SUPPLIERINVOICE_PROCESS_SRV/entities/A_SuplrInvcSeldSrvcEntrShtLean",
+  "url": "http://localhost:8000/api/services/OP_API_SUPPLIERINVOICE_PROCESS_SRV/entities/A_SuplrInvcSeldSrvcEntrShtLean",
+  "query_params": null,
+  "body": {
+    "type": "object",
+    "properties": {
+      "SupplierInvoice": {
+        "name": "SupplierInvoice",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "FiscalYear": {
+        "name": "FiscalYear",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ServiceEntrySheet": {
+        "name": "ServiceEntrySheet",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ServiceEntrySheetItem": {
+        "name": "ServiceEntrySheetItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "response": {
+    "type": "object",
+    "properties": {
+      "SupplierInvoice": {
+        "name": "SupplierInvoice",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "FiscalYear": {
+        "name": "FiscalYear",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ServiceEntrySheet": {
+        "name": "ServiceEntrySheet",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      },
+      "ServiceEntrySheetItem": {
+        "name": "ServiceEntrySheetItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    "required": []
+  },
+  "capabilities": {
+    "insertable": false
+  }
+}

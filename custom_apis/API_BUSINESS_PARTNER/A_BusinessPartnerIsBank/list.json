@@ -1,0 +1,93 @@
+{
+  "description": "List records from A_BusinessPartnerIsBank",
+  "method": "GET",
+  "path": "/api/services/API_BUSINESS_PARTNER/entities/A_BusinessPartnerIsBank",
+  "url": "http://localhost:8000/api/services/API_BUSINESS_PARTNER/entities/A_BusinessPartnerIsBank",
+  "query_params": [
+    {
+      "name": "$top",
+      "type": "query",
+      "required": false,
+      "default": 100,
+      "schema": {
+        "python_type": "int"
+      }
+    },
+    {
+      "name": "$skip",
+      "type": "query",
+      "required": false,
+      "default": 0,
+      "schema": {
+        "python_type": "int"
+      }
+    }
+  ],
+  "body": null,
+  "response": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "BusinessPartner": {
+          "name": "BusinessPartner",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": false,
+          "max_length": 10,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "BankKey": {
+          "name": "BankKey",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 15,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "BankCountry": {
+          "name": "BankCountry",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 3,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        },
+        "BPMinimumReserve": {
+          "name": "BPMinimumReserve",
+          "edm_type": "Edm.String",
+          "python_type": "str",
+          "nullable": true,
+          "max_length": 1,
+          "precision": null,
+          "scale": null,
+          "is_collection": false,
+          "is_navigation": false,
+          "editable": true
+        }
+      },
+      "required": []
+    }
+  },
+  "capabilities": {
+    "readable": true,
+    "insertable": true,
+    "updatable": true,
+    "deletable": false,
+    "top_supported": true,
+    "skip_supported": true,
+    "filterable": true
+  }
+}

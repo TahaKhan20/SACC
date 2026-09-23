@@ -1,0 +1,116 @@
+{
+  "description": "Delete a A_PurchaseContractItemNotesType record by key",
+  "method": "DELETE",
+  "path": "/api/services/OP_API_PURCHASECONTRACT_PROCESS_SRV_0002/entities/A_PurchaseContractItemNotes/item",
+  "url": "http://localhost:8000/api/services/OP_API_PURCHASECONTRACT_PROCESS_SRV_0002/entities/A_PurchaseContractItemNotes/item",
+  "query_params": [
+    {
+      "name": "Language",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "Language",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 2,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "TextObjectType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "TextObjectType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 4,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "ArchitecturalObjectNumber",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "ArchitecturalObjectNumber",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 70,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "TechnicalObjectType",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "TechnicalObjectType",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchaseContractItem",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseContractItem",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 5,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    },
+    {
+      "name": "PurchaseContract",
+      "type": "query",
+      "required": true,
+      "schema": {
+        "name": "PurchaseContract",
+        "edm_type": "Edm.String",
+        "python_type": "str",
+        "nullable": false,
+        "max_length": 10,
+        "precision": null,
+        "scale": null,
+        "is_collection": false,
+        "is_navigation": false,
+        "editable": true
+      }
+    }
+  ],
+  "body": null,
+  "response": null,
+  "status_code": 204,
+  "capabilities": {
+    "deletable": false
+  }
+}
