@@ -17,8 +17,12 @@ Configuration (env vars):
     GRAPH_API_TOKEN    Bearer token           (required)
     GRAPH_API_BASE_URL  Graph endpoint         (default: https://graph.microsoft.com)
 
+Credentials are read ONLY from environment variables — no CLI args.
+
 Usage (standalone):
-    python email_intake_agent.py --user-id user@domain.com --api-token eyJ0e...
+    export GRAPH_USER_ID="user@domain.com"
+    export GRAPH_API_TOKEN="eyJ0e..."
+    python email_intake_agent.py
 """
 
 from __future__ import annotations
@@ -272,32 +276,30 @@ def save_attachment_to_temp(attachment: dict[str, Any]) -> Optional[str]:
 
 
 def run_intake(
-    user_id: str = "",
-    api_token: str = "",
     top: int = 50,
     min_score: int = 20,
 ) -> dict[str, Any]:
     """Run all three intake nodes: fetch → enrich → classify.
 
+    Credentials are read from module-level env vars GRAPH_USER_ID and
+    GRAPH_API_TOKEN.  They are NOT accepted as function parameters.
+
     Returns dict with total_emails, relevant_emails (list of EmailMessage),
     and any errors.
     """
-    uid = user_id or GRAPH_USER_ID
-    token = api_token or GRAPH_API_TOKEN
-
-    if not uid or not token:
-        return {"error": "Missing user_id or api_token", "total_emails": 0, "relevant_emails": []}
+    if not GRAPH_USER_ID or not GRAPH_API_TOKEN:
+        return {"error": "Missing GRAPH_USER_ID or GRAPH_API_TOKEN env var", "total_emails": 0, "relevant_emails": []}
 
     logger.info("=" * 60)
     logger.info("STARTING EMAIL INTAKE AGENT")
     logger.info("=" * 60)
 
-    emails = fetch_emails(uid, token, top=top)
+    emails = fetch_emails(GRAPH_USER_ID, GRAPH_API_TOKEN, top=top)
     if not emails:
         logger.warning("No emails fetched")
         return {"total_emails": 0, "relevant_emails": [], "errors": ["No emails fetched"]}
 
-    emails = enrich_emails(emails, uid, token)
+    emails = enrich_emails(emails, GRAPH_USER_ID, GRAPH_API_TOKEN)
     relevant = classify_emails(emails, min_score=min_score)
 
     return {"total_emails": len(emails), "relevant_emails": relevant, "errors": []}
@@ -313,17 +315,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Email Intake Agent: fetch and classify emails from Microsoft Graph.",
     )
-    parser.add_argument("--user-id", type=str, default=GRAPH_USER_ID,
-                        required=not bool(GRAPH_USER_ID),
-                        help="Microsoft Graph user ID or UPN")
-    parser.add_argument("--api-token", type=str, default=GRAPH_API_TOKEN,
-                        required=not bool(GRAPH_API_TOKEN),
-                        help="Microsoft Graph API bearer token")
     parser.add_argument("--top", type=int, default=50, help="Max emails to fetch")
     parser.add_argument("--min-score", type=int, default=20, help="Min relevance score")
     args = parser.parse_args()
 
-    result = run_intake(user_id=args.user_id, api_token=args.api_token, top=args.top, min_score=args.min_score)
+    result = run_intake(top=args.top, min_score=args.min_score)
 
     print("\n" + "=" * 60)
     print("EMAIL INTAKE RESULTS")

@@ -60,12 +60,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger("workflow")
 
-# ── Configuration ─────────────────────────────────────────────────────────
-
-GRAPH_USER_ID = os.getenv("GRAPH_USER_ID", "")
-GRAPH_API_TOKEN = os.getenv("GRAPH_API_TOKEN", "")
-
-
 # ── Triage Node ────────────────────────────────────────────────────────────
 
 
@@ -156,8 +150,6 @@ def triage_documents(relevant_emails: list, dry_run: bool = False) -> tuple[list
 def run_workflow(
     top: int = 50,
     dry_run: bool = False,
-    user_id: str = "",
-    api_token: str = "",
     min_score: int = 20,
 ) -> dict[str, Any]:
     """Run the full email-to-triage workflow.
@@ -165,11 +157,12 @@ def run_workflow(
     Delegates email fetching, enrichment, and classification to the Email
     Intake Agent, then runs the Triage Agent on relevant document attachments.
 
+    Credentials (GRAPH_USER_ID, GRAPH_API_TOKEN) are read from environment
+    variables by the Email Intake Agent — not passed through this function.
+
     Args:
         top: Maximum number of emails to fetch from the mailbox.
         dry_run: If True, fetch and classify emails but skip triage.
-        user_id: Microsoft Graph user ID or UPN (e.g. user@domain.com).
-        api_token: Microsoft Graph API bearer token.
         min_score: Minimum relevance score for email classification.
 
     Returns:
@@ -179,10 +172,8 @@ def run_workflow(
     logger.info("STARTING EMAIL-TO-TRIAGE WORKFLOW")
     logger.info("=" * 60)
 
-    # Step 1: Email Intake Agent — fetch, enrich, classify
+    # Step 1: Email Intake Agent — fetch, enrich, classify (reads env vars)
     intake_result = run_intake(
-        user_id=user_id,
-        api_token=api_token,
         top=top,
         min_score=min_score,
     )
@@ -225,12 +216,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Email-to-Triage Workflow: connect Email Intake Agent to Triage Agent.",
     )
-    parser.add_argument("--user-id", type=str, default=GRAPH_USER_ID,
-                        required=not bool(GRAPH_USER_ID),
-                        help="Microsoft Graph user ID or UPN (e.g. user@domain.com)")
-    parser.add_argument("--api-token", type=str, default=GRAPH_API_TOKEN,
-                        required=not bool(GRAPH_API_TOKEN),
-                        help="Microsoft Graph API bearer token")
     parser.add_argument("--top", type=int, default=50, help="Max emails to fetch (default: 50)")
     parser.add_argument("--min-score", type=int, default=20, help="Min relevance score (default: 20)")
     parser.add_argument("--dry-run", action="store_true", help="Fetch and classify only, skip triage")
@@ -239,8 +224,6 @@ def main() -> None:
     summary = run_workflow(
         top=args.top,
         dry_run=args.dry_run,
-        user_id=args.user_id,
-        api_token=args.api_token,
         min_score=args.min_score,
     )
 
