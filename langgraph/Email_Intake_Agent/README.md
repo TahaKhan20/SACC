@@ -1,27 +1,29 @@
-# Microsoft Graph Mail API Mock (Read-Only)
+# Email Intake Agent
 
-Standalone FastAPI application that mocks Microsoft Graph v1.0 Mail **read-only** endpoints for development and testing.
+Fetches, enriches, and classifies emails from Microsoft Graph API (or a mock API). Identifies relevant emails with invoice/document attachments for downstream triage.
 
 ## Folder Structure
 
 ```
-graph_mock/
-├── graph_mail_mock.py              # FastAPI app — read-only mock endpoints
-├── messages.json                   # Seed data — 5 mock messages (inbox, drafts, sent)
-└── README.md                       # This file
+Email_Intake_Agent/
+├── email_intake_agent.py           # Main script: fetch, enrich, classify
+├── requirements.txt                 # Dependencies
+├── .env.example                     # Environment variable template
+└── README.md                        # This file
 ```
 
 ## Quick Start
 
 ```bash
-pip install fastapi uvicorn[standard] httpx
+pip install -r requirements.txt
 
-# Run from inside the graph_mock folder
-cd graph_mock
-uvicorn graph_mail_mock:app --reload --port 8001
+# Copy .env.example to .env and set your credentials
+cp .env.example .env
+# Edit .env to set GRAPH_USER_ID, GRAPH_API_TOKEN, etc.
+
+# Run the intake agent
+python email_intake_agent.py --top 10
 ```
-
-API docs (Swagger UI): `http://localhost:8001/docs`
 
 ## Endpoints
 
@@ -88,10 +90,42 @@ Single-item responses use the `$entity` suffix:
 }
 ```
 
+## Environment Variables
+
+| Variable | Required | Default | Description |
+| --- | --- | --- | --- |
+| `GRAPH_USER_ID` | Yes | - | User ID or UPN (e.g., `user@domain.com`) |
+| `GRAPH_API_TOKEN` | Yes | - | API access token |
+| `GRAPH_API_BASE_URL` | No | `https://graph.microsoft.com` | Base URL for Graph API |
+| `GRAPH_AUTH_MODE` | No | `bearer` | Auth mode: `bearer` (real Graph API) or `query_param` (mock API) |
+
+### For Mock API (Local Development)
+
+```bash
+GRAPH_API_BASE_URL=http://0.0.0.0:8002
+GRAPH_AUTH_MODE=query_param
+GRAPH_USER_ID=user@domain.com
+GRAPH_API_TOKEN=12346789abcdefgh
+```
+
+### For Real Microsoft Graph API
+
+```bash
+GRAPH_API_BASE_URL=https://graph.microsoft.com
+GRAPH_AUTH_MODE=bearer
+GRAPH_USER_ID=your.email@company.com
+GRAPH_API_TOKEN=<your_bearer_token>
+```
+
+## CLI Arguments
+
+| Argument | Default | Description |
+| --- | --- | --- |
+| `--top` | 50 | Maximum number of emails to fetch |
+| `--min-score` | 20 | Minimum relevance score (0-100) for classification |
+
 ## Notes
 
-* **No auth** — open mock, just like the SAP EDMX project
-* **In-memory** — all data is lost on restart; reload from JSON with `POST /api/reload`
-* **Port 8001** — avoids conflict with the SAP EDMX mock on port 8000
-* **Read-only** — no POST/PATCH/DELETE endpoints; data is seeded from `messages.json` at startup
-* **Standalone** — does not depend on or modify the SAP EDMX files (`main.py`, `edmx_parser.py`, `api_generator.py`, `crud_engine.py`)
+* **Auth modes**: `bearer` sends token in `Authorization: Bearer <token>` header (Microsoft Graph standard). `query_param` sends token as `?api_token=<token>` query parameter (for mock APIs).
+* **Attachment saving**: Document attachments (PDF, images, Office docs) are base64-decoded and can be saved to temp files for processing.
+* **Standalone**: Can be imported as a module (`from email_intake_agent import run_intake`) or run as a CLI script.

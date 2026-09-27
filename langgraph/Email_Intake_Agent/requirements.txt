@@ -1,7 +1,8 @@
-# Graph Mail Mock — requirements
+# Email Intake Agent — requirements
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
 httpx>=0.27.0
+python-dotenv>=1.0.0
 
 # Graph Mail Real — additional dependencies
 msal>=1.28.0
