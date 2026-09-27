@@ -2,13 +2,14 @@
 
 Slim orchestrator that wires together the three parts:
   - Part 2a: edmx_parser   (pure EDMX parsing library)
-  - Part 2b: api_generator  (portable FastAPI router per service)
+  - Part 2b: router_factory  (portable FastAPI router per service)
   - Part 3:  crud_engine    (generic CRUD testing proxy)
 """
 
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -16,8 +17,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
+# Add core/ to import path for library modules
+_CORE_DIR = Path(__file__).resolve().parent / "core"
+if str(_CORE_DIR) not in sys.path:
+    sys.path.insert(0, str(_CORE_DIR))
+
 from edmx_parser import ServiceMeta, parse_edmx_file
-from api_generator import create_service_router, reset_all_data, DATA_STORE
+from router_factory import create_service_router, reset_all_data, DATA_STORE
 from crud_engine import router as crud_router
 from generate_apis import generate_all_apis
 

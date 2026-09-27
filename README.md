@@ -10,11 +10,48 @@ It is designed to:
 * generate a metadata-driven frontend that adapts to the selected EDMX service and entity set
 * make it easier to create custom manual APIs and test UI flows before wiring to real SAP backends
 
+## Project structure
+
+```
+SACC/
+├── main.py              # FastAPI entrypoint
+├── index.html           # Frontend UI
+├── requirements.txt     # Python dependencies
+├── core/                # Core library modules (creates custom APIs)
+│   ├── edmx_parser.py       # Part 2a – EDMX parsing library
+│   ├── router_factory.py   # Part 2b – Runtime FastAPI router factory
+│   ├── crud_engine.py      # Part 3 – CRUD testing proxy
+│   ├── generate_apis.py     # Static API definition generator → custom_apis/
+│   └── generate_samples.py # Sample request payload generator → samples/
+├── apis/                # Input EDMX files
+├── custom_apis/         # Generated API definitions (output)
+└── langgraph/           # LangGraph-based agents
+    ├── Email_Intake_Agent/  # Email Intake Agent (fetch, enrich, classify emails)
+    │   ├── email_intake_agent.py   # Self-contained email intake script
+    │   ├── graph_mail_real.py      # Microsoft Graph Mail API connector (port 8002)
+    │   ├── .env.example
+    │   └── README.md
+    ├── TriageAgent/         # AP Invoice Triage Agent
+    │   ├── triage_agent.py
+    │   ├── run_sample.py
+    │   ├── sample_data.json
+    │   ├── doc_ai_payload.json
+    │   ├── .env.example
+    │   └── README.md
+    └── workflow/            # Thin orchestrator: Email Intake → Triage Agent
+        └── workflow.py
+```
+
 ## Project files
 
-* [main.py](#file-176967538994416) — generic backend parser, metadata inspector, and CRUD API engine
+* [main.py](#file-176967538994416) — FastAPI entrypoint that wires together all parts
 * [index.html](#file-176967538994417) — dynamic frontend that renders forms and tables from EDMX metadata
 * [apis](#folder-176967538994419) — place one or more `.edmx` files here
+* [core/edmx_parser.py](#file-4115198070678088) — Part 2a: pure EDMX parsing library
+* [core/router_factory.py](#file-4115198070676856) — Part 2b: portable FastAPI router per service
+* [core/crud_engine.py](#file-4115198070676870) — Part 3: generic CRUD testing proxy
+* [core/generate_apis.py](#file-4115198070678089) — generates API definition JSONs under custom_apis/
+* [core/generate_samples.py](#file-4115198070678090) — generates sample request payloads under samples/
 
 ## How it works
 
