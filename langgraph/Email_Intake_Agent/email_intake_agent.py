@@ -121,6 +121,7 @@ def fetch_emails(user_id: str, api_token: str, top: int = 50) -> list[EmailMessa
     try:
         with httpx.Client(timeout=30.0) as client:
             resp = client.get(url, headers=headers, params=params)
+            logger.info("Request URL: %s", resp.request.url)
             resp.raise_for_status()
             data = resp.json()
     except Exception as exc:
