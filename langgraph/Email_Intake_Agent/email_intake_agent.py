@@ -38,6 +38,13 @@ from typing import Any, Optional
 
 import httpx
 
+# Load .env file if present (python-dotenv)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 # ── Logging ───────────────────────────────────────────────────────────────
 
 logging.basicConfig(
@@ -49,8 +56,11 @@ logger = logging.getLogger("email_intake_agent")
 # ── Configuration ─────────────────────────────────────────────────────────
 
 GRAPH_API_BASE_URL = os.getenv("GRAPH_API_BASE_URL", "https://graph.microsoft.com")
-GRAPH_USER_ID = os.getenv("GRAPH_USER_ID", "")
-GRAPH_API_TOKEN = os.getenv("GRAPH_API_TOKEN", "")
+
+
+def _get_credentials() -> tuple[str, str]:
+    """Read credentials from env vars at call time (not import time)."""
+    return os.getenv("GRAPH_USER_ID", ""), os.getenv("GRAPH_API_TOKEN", "")
 
 _INVOICE_KEYWORDS = [
     "invoice", "rechnung", "factura", "credit note", "gutschrift",
@@ -281,25 +291,26 @@ def run_intake(
 ) -> dict[str, Any]:
     """Run all three intake nodes: fetch → enrich → classify.
 
-    Credentials are read from module-level env vars GRAPH_USER_ID and
-    GRAPH_API_TOKEN.  They are NOT accepted as function parameters.
+    Credentials are read from env vars GRAPH_USER_ID and GRAPH_API_TOKEN
+    (or a .env file via python-dotenv) at call time.
 
     Returns dict with total_emails, relevant_emails (list of EmailMessage),
     and any errors.
     """
-    if not GRAPH_USER_ID or not GRAPH_API_TOKEN:
+    user_id, api_token = _get_credentials()
+    if not user_id or not api_token:
         return {"error": "Missing GRAPH_USER_ID or GRAPH_API_TOKEN env var", "total_emails": 0, "relevant_emails": []}
 
     logger.info("=" * 60)
     logger.info("STARTING EMAIL INTAKE AGENT")
     logger.info("=" * 60)
 
-    emails = fetch_emails(GRAPH_USER_ID, GRAPH_API_TOKEN, top=top)
+    emails = fetch_emails(user_id, api_token, top=top)
     if not emails:
         logger.warning("No emails fetched")
         return {"total_emails": 0, "relevant_emails": [], "errors": ["No emails fetched"]}
 
-    emails = enrich_emails(emails, GRAPH_USER_ID, GRAPH_API_TOKEN)
+    emails = enrich_emails(emails, user_id, api_token)
     relevant = classify_emails(emails, min_score=min_score)
 
     return {"total_emails": len(emails), "relevant_emails": relevant, "errors": []}

@@ -15,15 +15,18 @@ The workflow does NOT fetch, enrich, or classify emails itself — that logic
 lives entirely in ``langgraph/Email_Intake_Agent/email_intake_agent.py``.
 
 Prerequisites:
-    - Microsoft Graph API access token (user_id + api_token)
+    - GRAPH_USER_ID and GRAPH_API_TOKEN env vars set
     - SACC API running:  python main.py  (port 8000)
     - Triage Agent configured via .env (see langgraph/TriageAgent/.env.example)
 
 Usage:
+    export GRAPH_USER_ID="user@domain.com"
+    export GRAPH_API_TOKEN="eyJ0e..."
+
     cd langgraph/workflow
-    python workflow.py --user-id user@domain.com --api-token eyJ0e...
-    python workflow.py --user-id user@domain.com --api-token eyJ0e... --top 10
-    python workflow.py --user-id user@domain.com --api-token eyJ0e... --dry-run
+    python workflow.py
+    python workflow.py --top 10
+    python workflow.py --dry-run
 """
 
 from __future__ import annotations
