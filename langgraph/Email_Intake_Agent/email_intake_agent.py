@@ -16,26 +16,16 @@ Configuration (env vars):
     GRAPH_USER_ID       Target user ID or UPN           (required)
     GRAPH_API_TOKEN     Access token                    (required)
     GRAPH_API_BASE_URL  Graph endpoint                  (default: https://graph.microsoft.com)
-    GRAPH_AUTH_MODE     Auth mode: "bearer" or "query_param"  (default: bearer)
 
-    Auth modes:
-        bearer       - Send token in Authorization: Bearer <token> header (real Graph API)
-        query_param  - Send token as ?api_token=<token> query param (mock APIs)
+Authentication:
+    Token is sent as ?api_token=<token> query parameter on all requests.
 
 Credentials are read ONLY from environment variables — no CLI args.
 
 Usage (standalone):
-    # For real Microsoft Graph API:
-    export GRAPH_USER_ID="user@domain.com"
-    export GRAPH_API_TOKEN="eyJ0e..."
-    export GRAPH_AUTH_MODE="bearer"
-    python email_intake_agent.py
-
-    # For mock API:
     export GRAPH_USER_ID="user@domain.com"
     export GRAPH_API_TOKEN="12346789abcdefgh"
     export GRAPH_API_BASE_URL="http://0.0.0.0:8002"
-    export GRAPH_AUTH_MODE="query_param"
     python email_intake_agent.py
 """
 
@@ -70,28 +60,11 @@ logger = logging.getLogger("email_intake_agent")
 # ── Configuration ─────────────────────────────────────────────────────────
 
 GRAPH_API_BASE_URL = os.getenv("GRAPH_API_BASE_URL", "https://graph.microsoft.com")
-GRAPH_AUTH_MODE = os.getenv("GRAPH_AUTH_MODE", "bearer")  # "bearer" or "query_param"
 
 
 def _get_credentials() -> tuple[str, str]:
     """Read credentials from env vars at call time (not import time)."""
     return os.getenv("GRAPH_USER_ID", ""), os.getenv("GRAPH_API_TOKEN", "")
-
-
-def _make_headers(api_token: str) -> dict[str, str]:
-    """Construct headers based on auth mode."""
-    headers = {"Accept": "application/json"}
-    if GRAPH_AUTH_MODE == "bearer":
-        headers["Authorization"] = f"Bearer {api_token}"
-    return headers
-
-
-def _make_params(base_params: dict, api_token: str) -> dict:
-    """Construct query params based on auth mode."""
-    params = base_params.copy()
-    if GRAPH_AUTH_MODE == "query_param":
-        params["api_token"] = api_token
-    return params
 
 _INVOICE_KEYWORDS = [
     "invoice", "rechnung", "factura", "credit note", "gutschrift",
@@ -137,13 +110,13 @@ def fetch_emails(user_id: str, api_token: str, top: int = 50) -> list[EmailMessa
     logger.info("Node 1: Fetching emails from Graph API for user %s …", user_id)
 
     url = f"{GRAPH_API_BASE_URL}/v1.0/users/{user_id}/messages"
-    headers = _make_headers(api_token)
-    base_params = {
+    headers = {"Accept": "application/json"}
+    params = {
+        "api_token": api_token,
         "$top": top,
         "$select": "id,subject,from,toRecipients,receivedDateTime,bodyPreview,"
                     "hasAttachments,importance,isRead",
     }
-    params = _make_params(base_params, api_token)
 
     try:
         with httpx.Client(timeout=30.0) as client:
@@ -189,17 +162,20 @@ def enrich_emails(emails: list[EmailMessage], user_id: str, api_token: str) -> l
     """Fetch full body content and attachment metadata for each email."""
     logger.info("Node 2: Enriching %d emails with full body and attachments …", len(emails))
 
-    headers = _make_headers(api_token)
+    headers = {"Accept": "application/json"}
     base = f"{GRAPH_API_BASE_URL}/v1.0/users/{user_id}/messages"
 
     with httpx.Client(timeout=30.0) as client:
         for email in emails:
             try:
-                base_params = {"$select": "id,subject,body,from,toRecipients"}
+                params = {
+                    "api_token": api_token,
+                    "$select": "id,subject,body,from,toRecipients"
+                }
                 resp = client.get(
                     f"{base}/{email.message_id}",
                     headers=headers,
-                    params=_make_params(base_params, api_token),
+                    params=params,
                 )
                 resp.raise_for_status()
                 full_msg = resp.json()
@@ -213,7 +189,7 @@ def enrich_emails(emails: list[EmailMessage], user_id: str, api_token: str) -> l
                     resp = client.get(
                         f"{base}/{email.message_id}/attachments",
                         headers=headers,
-                        params=_make_params({}, api_token)
+                        params={"api_token": api_token}
                     )
                     resp.raise_for_status()
                     att_data = resp.json()

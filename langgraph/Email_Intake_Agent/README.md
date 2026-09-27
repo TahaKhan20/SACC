@@ -97,24 +97,15 @@ Single-item responses use the `$entity` suffix:
 | `GRAPH_USER_ID` | Yes | - | User ID or UPN (e.g., `user@domain.com`) |
 | `GRAPH_API_TOKEN` | Yes | - | API access token |
 | `GRAPH_API_BASE_URL` | No | `https://graph.microsoft.com` | Base URL for Graph API |
-| `GRAPH_AUTH_MODE` | No | `bearer` | Auth mode: `bearer` (real Graph API) or `query_param` (mock API) |
 
-### For Mock API (Local Development)
+**Authentication:** Token is sent as `?api_token=<token>` query parameter on all requests.
+
+### Example Configuration
 
 ```bash
-GRAPH_API_BASE_URL=http://0.0.0.0:8002
-GRAPH_AUTH_MODE=query_param
-GRAPH_USER_ID=user@domain.com
+GRAPH_USER_ID=sacc.ap.invoice@addo.ai
 GRAPH_API_TOKEN=12346789abcdefgh
-```
-
-### For Real Microsoft Graph API
-
-```bash
-GRAPH_API_BASE_URL=https://graph.microsoft.com
-GRAPH_AUTH_MODE=bearer
-GRAPH_USER_ID=your.email@company.com
-GRAPH_API_TOKEN=<your_bearer_token>
+GRAPH_API_BASE_URL=http://0.0.0.0:8002
 ```
 
 ## CLI Arguments
@@ -126,6 +117,6 @@ GRAPH_API_TOKEN=<your_bearer_token>
 
 ## Notes
 
-* **Auth modes**: `bearer` sends token in `Authorization: Bearer <token>` header (Microsoft Graph standard). `query_param` sends token as `?api_token=<token>` query parameter (for mock APIs).
+* **Authentication**: Token is sent as `?api_token=<token>` query parameter on all Graph API requests.
 * **Attachment saving**: Document attachments (PDF, images, Office docs) are base64-decoded and can be saved to temp files for processing.
 * **Standalone**: Can be imported as a module (`from email_intake_agent import run_intake`) or run as a CLI script.
