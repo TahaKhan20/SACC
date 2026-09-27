@@ -1,0 +1,493 @@
+{
+    "processed": [
+        {
+            "attachment": "03-9_20230312052106.372_X_20260914071828.507_X.pdf",
+            "from": "hammadmasood@addo.ai",
+            "headerFields": {
+                "barcode": {
+                    "confidence": 1.0,
+                    "value": "ARRBcmFiaWFuIEhvcnNlIEZsaWdodAIPMzAwMjc2ODk1MTAwMDAzAxMyMDIyLTEyLTA0VDE0OjMyOjA3BAg3MDg3NS4wMAUEMC4wMA=="
+                },
+                "currencyCode": {
+                    "confidence": 0.8016101069136262,
+                    "value": "USD"
+                },
+                "documentDate": {
+                    "confidence": 0.794726225432759,
+                    "value": "2022-12-04"
+                },
+                "documentNumber": {
+                    "confidence": 0.7760049877926243,
+                    "value": "03/903/9"
+                },
+                "grossAmount": {
+                    "confidence": 0.7968962018732689,
+                    "value": 18900.0
+                },
+                "receiverAddress": {
+                    "confidence": 0.7896433877483733,
+                    "value": "Jeddah 21231"
+                },
+                "receiverName": {
+                    "confidence": 0.7750209391842218,
+                    "value": "Company Cargo Airline Saudia"
+                },
+                "senderAddress": {
+                    "confidence": 0.7800998559616222,
+                    "value": "P.O.Box 9839 Jeddah 21423 Saudi Arabia"
+                },
+                "senderBankAccount": {
+                    "confidence": 0.7792369184840803,
+                    "value": "SA5605000084003772639001"
+                },
+                "senderName": {
+                    "confidence": 0.7876933889811442,
+                    "value": "ARABIAN HORSE FLIGHTS"
+                },
+                "taxId": {
+                    "confidence": 0.780093161240638,
+                    "value": "300276895100003"
+                }
+            },
+            "jobId": "af2b0c90-d3f0-4f30-897d-741c15dc32e8",
+            "lineItems": [
+                {
+                    "description": "Air Freight"
+                }
+            ],
+            "processedAt": "2026-09-23T11:38:41.625265+00:00",
+            "received": "2026-09-21T10:45:57Z",
+            "status": "DONE",
+            "subject": "Test 1"
+        },
+        {
+            "attachment": "23001596RI_20260914062833.375_X.pdf",
+            "from": "hammadmasood@addo.ai",
+            "headerFields": {
+                "deliveryNoteNumber": {
+                    "confidence": 0.7292743362787717,
+                    "value": "1846320"
+                },
+                "documentDate": {
+                    "confidence": 0.7509469983474523,
+                    "value": "2023-02-09"
+                },
+                "documentNumber": {
+                    "confidence": 0.7351377048027498,
+                    "value": "23001596/RI/03"
+                },
+                "grossAmount": {
+                    "confidence": 0.7554951797414847,
+                    "value": 1480.05
+                },
+                "netAmount": {
+                    "confidence": 0.7547487909329509,
+                    "value": 1287.0
+                },
+                "purchaseOrderNumber": {
+                    "confidence": 0.7367727791864538,
+                    "value": "4200008052"
+                },
+                "receiverAddress": {
+                    "confidence": 0.7199736747473204,
+                    "value": "STATION CARGO AIRPORT JEDDAH P.0 BOX 630 21231 JEDDAH"
+                },
+                "receiverName": {
+                    "confidence": 0.7299101324967391,
+                    "value": "SAUDI AIRLINES CARGO COMPANY LLC"
+                },
+                "senderAddress": {
+                    "confidence": 0.7357637511782698,
+                    "value": "PO.Box3196 Riyadh1147Above"
+                },
+                "senderName": {
+                    "confidence": 0.7448782895103252,
+                    "value": "JAPIR BOOKSTORE"
+                },
+                "taxId": {
+                    "confidence": 0.737204203114615,
+                    "value": "300056280500002"
+                }
+            },
+            "jobId": "d142eb4e-2cae-4ee0-95d1-2c79a7e6a723",
+            "lineItems": [
+                {
+                    "description": "PAPER COPYING A4 PREMIUM 500S",
+                    "materialNumber": "RQ-C801A45H",
+                    "quantity": 75.0,
+                    "unitOfMeasure": "RM",
+                    "unitPrice": 13.8
+                },
+                {
+                    "description": "ENVELOPE MANILA 10\"X15\"",
+                    "materialNumber": "RQ-29515P",
+                    "quantity": 18.0,
+                    "unitOfMeasure": "PK",
+                    "unitPrice": 14.0
+                },
+                {
+                    "description": "PAPER COPYING A4 PREMIUM 500S",
+                    "materialNumber": "RQ-C801A45H",
+                    "quantity": 75.0,
+                    "unitOfMeasure": "RM"
+                },
+                {
+                    "description": "ENVELOPE MANILA 10\"X15\"",
+                    "materialNumber": "EQ-29515P",
+                    "quantity": 18.0,
+                    "unitOfMeasure": "PK"
+                }
+            ],
+            "processedAt": "2026-09-23T11:38:58.684383+00:00",
+            "received": "2026-09-21T10:47:38Z",
+            "status": "DONE",
+            "subject": "Test email 3"
+        },
+        {
+            "attachment": "E-IVOICE_20230312120519.710_X_20260914071915.152_X.pdf",
+            "from": "hammadmasood@addo.ai",
+            "headerFields": {
+                "barcode": {
+                    "confidence": 1.0,
+                    "value": "AS5SQVFBTSBJbnRlcm5hdGlvbmFsIExhYmVscyBhbmQgUmliYm9ucyBGYWN0b3J5Ag8zMTA1NDQ1MDY0MDAwMDMDFDIwMjItMTEtMDhUMTI6NDA6MDBaBAQ1MDgzBQM2NjM="
+                },
+                "currencyCode": {
+                    "confidence": 0.767561377585218,
+                    "value": "SAR"
+                },
+                "deliveryNoteNumber": {
+                    "confidence": 0.7658945372034518,
+                    "value": "8599"
+                },
+                "documentDate": {
+                    "confidence": 0.7577325049235898,
+                    "value": "2022-11-08"
+                },
+                "documentNumber": {
+                    "confidence": 0.7595355165425516,
+                    "value": "6466"
+                },
+                "grossAmount": {
+                    "confidence": 0.7715020334331011,
+                    "value": 4420.0
+                },
+                "netAmount": {
+                    "confidence": 0.7728905736143445,
+                    "value": 4420.0
+                },
+                "paymentTerms": {
+                    "confidence": 0.7513278140031904,
+                    "value": "CASH BEFORE DELIVERY"
+                },
+                "purchaseOrderNumber": {
+                    "confidence": 0.7446493800835006,
+                    "value": "4200007393"
+                },
+                "receiverContact": {
+                    "confidence": 0.7524652271775061,
+                    "value": "MR. SABIR SHAH"
+                },
+                "receiverName": {
+                    "confidence": 0.7508221212422869,
+                    "value": "SAUDIA CARGO"
+                },
+                "senderAddress": {
+                    "confidence": 0.7418744129139855,
+                    "value": "PO.Box 335119 , Riyadh 11341, Kingdom of Saudi Arabia"
+                },
+                "senderName": {
+                    "confidence": 0.7594626472945782,
+                    "value": "RAQAM INTERNATIONAL"
+                },
+                "shippingAmount": {
+                    "confidence": 0.7655373393989431,
+                    "value": 0.0
+                },
+                "taxId": {
+                    "confidence": 0.7560340678068072,
+                    "value": "310544506400003"
+                }
+            },
+            "jobId": "75d818f8-4713-4cc9-8151-458a0ea684de",
+            "lineItems": [
+                {
+                    "description": "DTR 100MM X 149MM ( BLANK )",
+                    "materialNumber": "FBD10014901",
+                    "quantity": 52.0,
+                    "unitPrice": 85.0
+                }
+            ],
+            "processedAt": "2026-09-23T11:39:20.647085+00:00",
+            "received": "2026-09-21T11:50:30Z",
+            "status": "DONE",
+            "subject": "Test 4"
+        },
+        {
+            "attachment": "INV-00041142312-SV_20260914082421.381_X.pdf",
+            "from": "hammadmasood@addo.ai",
+            "headerFields": {
+                "currencyCode": {
+                    "confidence": 0.9383448958396912,
+                    "value": "EUR"
+                },
+                "documentDate": {
+                    "confidence": 0.9126672148704529,
+                    "value": "2023-12-20"
+                },
+                "documentNumber": {
+                    "confidence": 0.9141902327537537,
+                    "value": "INV-00041142312-SV"
+                },
+                "dueDate": {
+                    "confidence": 0.7215574185053507,
+                    "value": "2024-02-03"
+                },
+                "grossAmount": {
+                    "confidence": 0.8874824047088623,
+                    "value": 87520.0
+                },
+                "receiverAddress": {
+                    "confidence": 0.8410710573196412,
+                    "value": "Product Development Dept. AL-Khaldiah - Saudi City - Villa NW 9-13 P.O Box 620 Jeddah 21231 Kingdom of Saudi Arabia"
+                },
+                "receiverCity": {
+                    "confidence": 0.63,
+                    "value": "Jeddah"
+                },
+                "receiverContact": {
+                    "confidence": 0.8073009848594666,
+                    "value": "Mr. Adel Elshazly"
+                },
+                "receiverCountryCode": {
+                    "confidence": 0.96,
+                    "value": "SA"
+                },
+                "receiverExtraAddressPart": {
+                    "confidence": 0.87,
+                    "value": "Product Development Dept. AL-Khaldiah"
+                },
+                "receiverHouseNumber": {
+                    "confidence": 0.86,
+                    "value": "9-13"
+                },
+                "receiverName": {
+                    "confidence": 0.8618608117103577,
+                    "value": "Saudia Airlines Cargo Company (SACC)"
+                },
+                "receiverPostalCode": {
+                    "confidence": 1.0,
+                    "value": "21231"
+                },
+                "receiverStreet": {
+                    "confidence": 0.54,
+                    "value": "Villa NW"
+                },
+                "senderAddress": {
+                    "confidence": 0.8909854193528494,
+                    "value": "M\u00f6nchhofallee 7.\u00b7 D-65451 Kelsterbach \u00b7 Germany"
+                },
+                "senderBankAccount": {
+                    "confidence": 0.9003713428974152,
+                    "value": "DE11570400440203977400"
+                },
+                "senderCity": {
+                    "confidence": 0.98,
+                    "value": "Kelsterbach"
+                },
+                "senderCountryCode": {
+                    "confidence": 1.0,
+                    "value": "DE"
+                },
+                "senderHouseNumber": {
+                    "confidence": 0.79,
+                    "value": "7.\u00b7"
+                },
+                "senderName": {
+                    "confidence": 0.8944328129291534,
+                    "value": "DoKaSch TEMPERATURE SOLUTIONS GmbH"
+                },
+                "senderPostalCode": {
+                    "confidence": 1.0,
+                    "value": "D-65451"
+                },
+                "senderStreet": {
+                    "confidence": 0.98,
+                    "value": "M\u00f6nchhofallee"
+                },
+                "taxId": {
+                    "confidence": 0.8620440363883972,
+                    "value": "DE286892195"
+                }
+            },
+            "jobId": "1f1f47b3-bef9-440c-b094-b2ce664b7373",
+            "lineItems": [
+                {
+                    "description": "Opticooler-Rentals",
+                    "netAmount": 87520.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 4150.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 4150.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 4730.0,
+                    "unitPrice": 4600.0
+                },
+                {
+                    "netAmount": 4730.0,
+                    "unitPrice": 4600.0
+                },
+                {
+                    "netAmount": 4730.0,
+                    "unitPrice": 4600.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 3750.0,
+                    "unitPrice": 3750.0
+                },
+                {
+                    "netAmount": 5030.0,
+                    "unitPrice": 4600.0
+                }
+            ],
+            "processedAt": "2026-09-23T11:39:37.275511+00:00",
+            "received": "2026-09-21T11:51:31Z",
+            "status": "DONE",
+            "subject": "Test 5"
+        },
+        {
+            "attachment": "INV1010.pdf",
+            "from": "muhammadsameer@addo.ai",
+            "headerFields": {
+                "barcode": {
+                    "confidence": 1.0,
+                    "value": "ARRNYXN0ZXIgV29ya3MgQ29tcGFueQIPMzEwNDY5MzgwOTEwMDAzAxMyMDI1LTA4LTMxVDEwOjE5OjAwBAg4MDUwMC4wMAUIMTA1MDAuMDAGLFFlUEtzZVlUdWNmbGhzUlRoZkM2cTVnUHE0UEE2WkxqU2FpOHE2Tm1wemM9B2BNRVlDSVFERzZJZGZWQjMzVUYyeTJpNS9BSG53dlVkSDFCaDdHRjBQZGtPaTl5Umx4d0loQUpNVmZBSFNuMzh5UFJLa051NVp5Ry9aN2svZjFZYzEyK0NHVnRNZWVNQ0kIWzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKiItL2yFHs7DZzF28m78i7/j1UfmMjvCmYTswmtSWXaEcsXRG0kj5HigRwVTuOWddos5n3681HvpACoN/Q+9rM="
+                },
+                "currencyCode": {
+                    "confidence": 0.7705021888926735,
+                    "value": "SAR"
+                },
+                "deliveryDate": {
+                    "confidence": 0.7826336635274616,
+                    "value": "2025-08-31"
+                },
+                "documentDate": {
+                    "confidence": 0.7844546339992954,
+                    "value": "2025-09-17"
+                },
+                "documentNumber": {
+                    "confidence": 0.7866161525870243,
+                    "value": "INV1010"
+                },
+                "dueDate": {
+                    "confidence": 0.7902337364537118,
+                    "value": "2025-10-17"
+                },
+                "grossAmount": {
+                    "confidence": 0.7596932059253408,
+                    "value": 80500.0
+                },
+                "netAmount": {
+                    "confidence": 0.7633517106657366,
+                    "value": 70000.0
+                },
+                "purchaseOrderNumber": {
+                    "confidence": 0.7722879162356739,
+                    "value": "202508202508"
+                },
+                "receiverAddress": {
+                    "confidence": 0.7671428992140366,
+                    "value": "2661 23525 Jeddah Saudi Arabia"
+                },
+                "receiverName": {
+                    "confidence": 0.7768917342191188,
+                    "value": "Saudi Airlines Cargo Company JSC"
+                },
+                "senderAddress": {
+                    "confidence": 0.7583550416169239,
+                    "value": "6271 King Abdulaziz Rd 13322 Riyadh Al Yasmeen Dist. Riyadh Saudi Arabia"
+                },
+                "senderName": {
+                    "confidence": 0.7748646755894906,
+                    "value": "Master Works Company"
+                },
+                "taxId": {
+                    "confidence": 0.789302980489058,
+                    "value": "310469380910003"
+                }
+            },
+            "jobId": "8c170136-4eac-4639-93ca-e558bbb7ec01",
+            "lineItems": [
+                {
+                    "description": "Dashboards Building Dashboards on system",
+                    "quantity": 2.0,
+                    "unitPrice": 35000.0
+                }
+            ],
+            "processedAt": "2026-09-23T11:39:53.849271+00:00",
+            "received": "2026-09-23T11:24:32Z",
+            "status": "DONE",
+            "subject": "Sample mail 1"
+        }
+    ]
+}
