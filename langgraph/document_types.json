@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "category": "Invoice",
+      "document_type": ["invoice", "inv"]
+    },
+    {
+      "category": "Credit Note",
+      "document_type": ["credit note", "credit memo", "credit"]
+    },
+    {
+      "category": "Supporting Document",
+      "document_type": ["supporting document", "delivery note", "packing slip", "proof of delivery"]
+    },
+    {
+      "category": "Reconciliation",
+      "document_type": ["reconciliation", "discrepancy"]
+    },
+    {
+      "category": "Statement of Account",
+      "document_type": ["statement of account", "account summary", "account statement"]
+    },
+    {
+      "category": "Purchase Order List",
+      "document_type": ["purchase order", "order list", "po list"]
+    },
+    {
+      "category": "General Correspondence",
+      "document_type": ["correspondence", "notification", "reminder"]
+    }
+  ]
+}

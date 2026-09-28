@@ -66,19 +66,19 @@ def _get_credentials() -> tuple[str, str]:
     """Read credentials from env vars at call time (not import time)."""
     return os.getenv("GRAPH_USER_ID", ""), os.getenv("GRAPH_API_TOKEN", "")
 
-# ── Category Mapping (loaded from shared keywords.json) ──────────────────
+# ── Category Mapping (loaded from shared document_types.json) ────────────
 
-_KEYWORDS_FILE = Path(__file__).resolve().parent.parent / "keywords.json"
-with open(_KEYWORDS_FILE, "r", encoding="utf-8") as _f:
-    _KEYWORDS_DATA = json.load(_f)
+_DOCUMENT_TYPES_FILE = Path(__file__).resolve().parent.parent / "document_types.json"
+with open(_DOCUMENT_TYPES_FILE, "r", encoding="utf-8") as _f:
+    _DOCUMENT_TYPES_DATA = json.load(_f)
 
-_KEYWORD_CATEGORIES = [
-    (item["category"], item["keywords"])
-    for item in _KEYWORDS_DATA["categories"]
+_DOCUMENT_TYPE_CATEGORIES = [
+    (item["category"], item["document_type"])
+    for item in _DOCUMENT_TYPES_DATA["categories"]
 ]
 
-# Flat keyword list derived from _KEYWORD_CATEGORIES — do not edit manually.
-_INVOICE_KEYWORDS = [kw for _cat, kws in _KEYWORD_CATEGORIES for kw in kws]
+# Flat document type list derived from _DOCUMENT_TYPE_CATEGORIES — do not edit manually.
+DOC_TYPES = [dt for _cat, dts in _DOCUMENT_TYPE_CATEGORIES for dt in dts]
 
 _DOCUMENT_EXTENSIONS = {
     ".pdf", ".png", ".jpg", ".jpeg", ".tif", ".tiff",
@@ -112,10 +112,10 @@ class EmailMessage:
 
 
 def _categorize_email(email: EmailMessage) -> str:
-    """Return a category label based on which keyword group matches first.
+    """Return a category label based on which document type group matches first.
 
     Checks subject, body, and attachment names against each group in order.
-    Returns 'Uncategorized' if no group matches.
+    Returns 'General Correspondence' if no group matches.
     """
     combined = " ".join([
         email.subject.lower(),
@@ -125,8 +125,8 @@ def _categorize_email(email: EmailMessage) -> str:
     for att in email.attachments:
         combined += " " + att.get("name", "").lower()
 
-    for category, keywords in _KEYWORD_CATEGORIES:
-        if any(kw in combined for kw in keywords):
+    for category, doc_types in _DOCUMENT_TYPE_CATEGORIES:
+        if any(dt in combined for dt in doc_types):
             return category
     return "General Correspondence"
 
@@ -247,17 +247,17 @@ def _has_document_attachment(email: EmailMessage) -> bool:
 
 
 # ── Scoring Weights (tunable) ─────────────────────────────────────────────
-SUBJECT_KEYWORD_POINTS = 20      # rule 1: keyword in subject
-BODY_KEYWORD_POINTS = 20        # rule 2: keyword in body
+SUBJECT_DOC_TYPE_POINTS = 20      # rule 1: document type in subject
+BODY_DOC_TYPE_POINTS = 20        # rule 2: document type in body
 HAS_ATTACHMENT_POINTS = 30      # rule 3: any attachment present
-ATTACHMENT_KEYWORD_POINTS = 30  # rule 4: keyword in attachment name
+ATTACHMENT_DOC_TYPE_POINTS = 30  # rule 4: document type in attachment name
 MIN_SCORE_THRESHOLD = 50        # emails with 50+ go to next agent
 
 
 def _score_with_details(email: EmailMessage) -> tuple[int, list[dict]]:
     """Score an email and return (score, breakdown of each rule).
 
-    Each rule entry: {"rule": str, "matched": bool, "points": int, "keywords": list}
+    Each rule entry: {"rule": str, "matched": bool, "points": int, "document_types": list}
     """
     subject_lower = email.subject.lower()
     body_lower = (email.body_preview + " " + email.body_content).lower()
@@ -265,37 +265,37 @@ def _score_with_details(email: EmailMessage) -> tuple[int, list[dict]]:
     details = []
     score = 0
 
-    # Rule 1: keyword in subject
-    matched = [kw for kw in _INVOICE_KEYWORDS if kw in subject_lower]
+    # Rule 1: document type in subject
+    matched = [dt for dt in DOC_TYPES if dt in subject_lower]
     hit = bool(matched)
-    score += SUBJECT_KEYWORD_POINTS if hit else 0
-    details.append({"rule": "keyword in subject", "matched": hit,
-                    "points": SUBJECT_KEYWORD_POINTS if hit else 0, "keywords": matched})
+    score += SUBJECT_DOC_TYPE_POINTS if hit else 0
+    details.append({"rule": "document type in subject", "matched": hit,
+                    "points": SUBJECT_DOC_TYPE_POINTS if hit else 0, "document_types": matched})
 
-    # Rule 2: keyword in body
-    matched = [kw for kw in _INVOICE_KEYWORDS if kw in body_lower]
+    # Rule 2: document type in body
+    matched = [dt for dt in DOC_TYPES if dt in body_lower]
     hit = bool(matched)
-    score += BODY_KEYWORD_POINTS if hit else 0
-    details.append({"rule": "keyword in body", "matched": hit,
-                    "points": BODY_KEYWORD_POINTS if hit else 0, "keywords": matched})
+    score += BODY_DOC_TYPE_POINTS if hit else 0
+    details.append({"rule": "document type in body", "matched": hit,
+                    "points": BODY_DOC_TYPE_POINTS if hit else 0, "document_types": matched})
 
     # Rule 3: has any attachment
     has_att = email.has_attachments or email.attachments
     score += HAS_ATTACHMENT_POINTS if has_att else 0
     details.append({"rule": "has attachment", "matched": has_att,
-                    "points": HAS_ATTACHMENT_POINTS if has_att else 0, "keywords": []})
+                    "points": HAS_ATTACHMENT_POINTS if has_att else 0, "document_types": []})
 
-    # Rule 4: keyword in attachment name
+    # Rule 4: document type in attachment name
     matched = []
     for att in email.attachments:
         att_name = att.get("name", "").lower()
-        for kw in _INVOICE_KEYWORDS:
-            if kw in att_name and kw not in matched:
-                matched.append(kw)
+        for dt in DOC_TYPES:
+            if dt in att_name and dt not in matched:
+                matched.append(dt)
     hit = bool(matched)
-    score += ATTACHMENT_KEYWORD_POINTS if hit else 0
-    details.append({"rule": "keyword in attachment name", "matched": hit,
-                    "points": ATTACHMENT_KEYWORD_POINTS if hit else 0, "keywords": matched})
+    score += ATTACHMENT_DOC_TYPE_POINTS if hit else 0
+    details.append({"rule": "document type in attachment name", "matched": hit,
+                    "points": ATTACHMENT_DOC_TYPE_POINTS if hit else 0, "document_types": matched})
 
     return min(100, score), details
 
@@ -321,7 +321,7 @@ def classify_emails(emails: list[EmailMessage], min_score: int = 50) -> list[Ema
         breakdown = []
         for d in details:
             mark = "\u2713" if d["matched"] else "\u2717"
-            kws = f"  [{', '.join(d['keywords'])}]" if d["keywords"] else ""
+            kws = f"  [{', '.join(d['document_types'])}]" if d["document_types"] else ""
             breakdown.append(f"  {mark} {d['rule']} ({d['points']}pts){kws}")
 
         if score >= min_score:
