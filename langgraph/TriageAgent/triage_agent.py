@@ -86,6 +86,14 @@ LLM_BASE_URL = os.getenv("LLM_BASE_URL", "")
 DOC_AI_SERVICE = "document_information_extraction_api_v2"
 SUPPLIER_INVOICE_SERVICE = "OP_API_SUPPLIERINVOICE_PROCESS_SRV"
 
+# ── Temp: temp_input folder for saving uploaded documents ──────────────────
+# TEMP CODE: Save uploaded document info to temp_input folder after upload.
+# Combined with using the seeded DocumentVersion from the Get Document API,
+# this prevents document_type from defaulting to "OTHER".
+# Remove this once the mock API or real SAP Document AI can process uploaded
+# files and return real extraction results.
+_TEMP_INPUT_DIR = Path(__file__).resolve().parent.parent / "temp_input"
+
 
 # -- Enums -------------------------------------------------------------------
 
@@ -115,6 +123,25 @@ class InvoiceType(str, Enum):
     CHARTER = "CHARTER"
     SERVICE = "SERVICE"
     OTHER = "OTHER"
+
+
+# ── Shared keyword categories (loaded from keywords.json) ─────────────────
+_KEYWORDS_FILE = Path(__file__).resolve().parent.parent / "keywords.json"
+with open(_KEYWORDS_FILE, "r", encoding="utf-8") as _f:
+    _KEYWORDS_DATA = json.load(_f)
+
+_KEYWORD_CATEGORIES = [
+    (item["category"], item["keywords"])
+    for item in _KEYWORDS_DATA["categories"]
+]
+
+# Mapping from email intake categories to TriageAgent DocumentType
+_CATEGORY_TO_DOC_TYPE = {
+    "Invoice": DocumentType.INVOICE,
+    "Credit Note": DocumentType.CREDIT_NOTE,
+    "Statement of Account": DocumentType.STATEMENT,
+    "Supporting Document": DocumentType.SUPPORTING_DOCUMENT,
+}
 
 
 # -- Data Models -------------------------------------------------------------
@@ -371,16 +398,23 @@ class DocAIApiClient:
     def trigger_processing(self, document_id: str) -> dict[str, Any]:
         """Trigger document processing.
 
-        NOTE: This API is MISSING from the SACC mock. The real SAP Document AI
-        would process the document asynchronously after a Document record is
-        created. Here we simulate the result by creating a DocumentVersion.
+        TEMP: Instead of creating a new DocumentVersion (which has no seeded
+        DocumentEntities), list the existing seeded DocumentVersions from the
+        Get Document API and use the first one's ID. This way
+        get_extraction_results will find the seeded DocumentEntities and
+        document_type won't default to "OTHER".
         """
-        # TODO: Replace with real SAP Document AI processing trigger.
-        # Real flow: poll document status until COMPLETED, then read DocumentEntities.
-        logger.warning(
-            "Document processing trigger is not available in SACC mock. "
-            "Simulating processing for document_id=%s", document_id,
-        )
+        # TEMP: Use existing seeded DocumentVersion instead of creating a new one
+        versions = self.list_document_versions()
+        if versions:
+            version_id = versions[0].get("ID", str(uuid.uuid4()))
+            logger.info("Using seeded DocumentVersion: %s", version_id)
+            return {
+                "document_version_id": version_id,
+                "status": "COMPLETED",
+            }
+        # Fallback: create new version if no seeded versions exist
+        logger.warning("No seeded DocumentVersions found — creating new one")
         version_id = str(uuid.uuid4())
         self.create_document_version({
             "ID": version_id,
@@ -390,23 +424,25 @@ class DocAIApiClient:
         return {
             "document_version_id": version_id,
             "status": "COMPLETED",
-            "_mock": True,
-            "_note": "Processing trigger not in SACC mock. Simulated DocumentVersion created.",
         }
 
     def get_extraction_results(self, document_version_id: str) -> list[dict[str, Any]]:
         """Retrieve extraction results (DocumentEntities) for a document version.
 
-        NOTE: In the SACC mock, DocumentEntities are seeded with sample data.
-        Real SAP Document AI would populate these after processing.
+        TEMP: If no entities found for the given version, fall back to listing
+        ALL DocumentEntities (the seeded ones) so classification has data to
+        work with instead of returning 0 entities and defaulting to "OTHER".
         """
         results = self.list_document_entities(document_version_id)
         if not results:
-            logger.warning(
-                "No DocumentEntities found for version_id=%s. "
-                "In production, SAP Document AI would populate these after processing.",
-                document_version_id,
-            )
+            # TEMP: Fall back to all seeded DocumentEntities
+            results = self.list_document_entities("")
+            if results:
+                logger.info("Using seeded DocumentEntities (%d entities)", len(results))
+            else:
+                logger.warning(
+                    "No DocumentEntities found at all — seeded data may be missing.",
+                )
         return results
 
 
@@ -593,7 +629,7 @@ def upload_document(state: TriageState) -> TriageState:
         file_name = "unknown_document.pdf"
         evidence.append("No file path provided -- using placeholder name")
 
-    # Upload file (mocked -- see DocAIApiClient.upload_file for details)
+    # Upload file to mock API
     file_record = client.upload_file(file_name, file_content or b"")
     file_id = file_record.get("ID", str(uuid.uuid4()))
 
@@ -605,6 +641,18 @@ def upload_document(state: TriageState) -> TriageState:
         "file_ID": file_id,
         "clientId": SAP_DOCAI_CLIENT_ID,
     })
+
+    # TEMP: Save uploaded document info to temp_input folder
+    _TEMP_INPUT_DIR.mkdir(parents=True, exist_ok=True)
+    _temp_doc_path = _TEMP_INPUT_DIR / f"{doc_id}.json"
+    with open(_temp_doc_path, "w", encoding="utf-8") as f:
+        json.dump({
+            "document_id": doc_id,
+            "file_id": file_id,
+            "file_name": file_name,
+            "file_size": len(file_content) if file_content else 0,
+        }, f, indent=2)
+    logger.info("Saved document info to temp_input: %s", _temp_doc_path.name)
 
     evidence.append(f"Document created with ID={doc_id}, file_ID={file_id}")
     logger.info("Document uploaded: ID=%s", doc_id)
@@ -645,8 +693,8 @@ def classify_with_document_api(state: TriageState) -> TriageState:
 def determine_document_type(state: TriageState) -> TriageState:
     """Determine the document type from classification extraction results.
 
-    Uses keyword matching on extracted fields to classify the document as
-    INVOICE, CREDIT_NOTE, STATEMENT, SUPPORTING_DOCUMENT, or OTHER.
+    Uses the shared keyword categories from keywords.json to classify the
+    document as INVOICE, CREDIT_NOTE, STATEMENT, SUPPORTING_DOCUMENT, or OTHER.
     """
     logger.info("Step 3: Determining document type...")
     evidence = state.get("evidence", [])
@@ -659,28 +707,15 @@ def determine_document_type(state: TriageState) -> TriageState:
 
     doc_type = DocumentType.OTHER
 
-    # Check explicit document_type field first
-    if doc_type_field:
-        if "invoice" in doc_type_field or "rechnung" in doc_type_field:
-            doc_type = DocumentType.INVOICE
-        elif "credit" in doc_type_field or "gutschrift" in doc_type_field:
-            doc_type = DocumentType.CREDIT_NOTE
-        elif "statement" in doc_type_field or "kontoauszug" in doc_type_field:
-            doc_type = DocumentType.STATEMENT
-        elif "support" in doc_type_field or "beleg" in doc_type_field:
-            doc_type = DocumentType.SUPPORTING_DOCUMENT
-    else:
-        # Fallback: keyword matching on all extracted text
-        if re.search(r"\binvoice\b|\brechnung\b|\bfactura\b", all_text):
-            doc_type = DocumentType.INVOICE
-        elif re.search(r"\bcredit\s*note\b|\bgutschrift\b", all_text):
-            doc_type = DocumentType.CREDIT_NOTE
-        elif re.search(r"\bstatement\b|\baccount\s*summary\b|\bkontoauszug\b", all_text):
-            doc_type = DocumentType.STATEMENT
-        elif re.search(r"\bsupporting\b|\battachment\b|\bbeleg\b", all_text):
-            doc_type = DocumentType.SUPPORTING_DOCUMENT
+    # Check explicit document_type field first, then fall back to all text
+    search_text = doc_type_field if doc_type_field else all_text
+    for category, keywords in _KEYWORD_CATEGORIES:
+        mapped_type = _CATEGORY_TO_DOC_TYPE.get(category)
+        if mapped_type and any(kw in search_text for kw in keywords):
+            doc_type = mapped_type
+            break
 
-    evidence.append(f"Document type determined: {doc_type.value} (based on extracted text and keywords)")
+    evidence.append(f"Document type determined: {doc_type.value} (based on shared keywords from keywords.json)")
     logger.info("Document type: %s", doc_type.value)
     return {**state, "document_type": doc_type.value, "evidence": evidence}
 

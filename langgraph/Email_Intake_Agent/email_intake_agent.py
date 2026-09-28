@@ -66,16 +66,15 @@ def _get_credentials() -> tuple[str, str]:
     """Read credentials from env vars at call time (not import time)."""
     return os.getenv("GRAPH_USER_ID", ""), os.getenv("GRAPH_API_TOKEN", "")
 
-# ── Category Mapping (single source of truth for keywords) ───────────────
+# ── Category Mapping (loaded from shared keywords.json) ──────────────────
+
+_KEYWORDS_FILE = Path(__file__).resolve().parent.parent / "keywords.json"
+with open(_KEYWORDS_FILE, "r", encoding="utf-8") as _f:
+    _KEYWORDS_DATA = json.load(_f)
 
 _KEYWORD_CATEGORIES = [
-    ("Invoice",              ["invoice", "in"]),
-    ("Credit Note",          ["credit note", "credit memo"]),
-    ("Supporting Document",  ["supporting document", "delivery note", "packing slip", "proof of delivery"]),
-    ("Reconciliation",       ["reconciliation", "discrepancy"]),
-    ("Statement of Account", ["statement of account", "account summary", "account statement"]),
-    ("Purchase Order List",  ["purchase order", "order list", "po list"]),
-    ("General Correspondence", ["correspondence", "notification", "reminder"]),
+    (item["category"], item["keywords"])
+    for item in _KEYWORDS_DATA["categories"]
 ]
 
 # Flat keyword list derived from _KEYWORD_CATEGORIES — do not edit manually.
