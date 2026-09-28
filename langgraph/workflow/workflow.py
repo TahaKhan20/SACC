@@ -158,7 +158,11 @@ def triage_documents(relevant_emails: list, dry_run: bool = False) -> tuple[list
 
             try:
                 # Call Triage Agent entry point
-                result = run_triage(file_path=temp_path, file_name=att_name)
+
+                # Override document_type with email category for now
+                # (triage agent's internal classification relies on mock API
+                # seeded data; use the email intake agent's category instead)
+                result["document_type"] = email.category
 
                 # TEMP: Save the upload payload + triage result to temp_input
                 # folder, keyed by a generated document_id. This file contains
