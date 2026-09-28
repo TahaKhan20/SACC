@@ -35,6 +35,7 @@ import json
 import logging
 import os
 import sys
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -62,6 +63,49 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("workflow")
+
+# ── Temp: temp_input folder for saving JSON payloads ──────────────────────
+# TEMP CODE: Creates a 'temp_input' folder to save JSON payloads after
+# document upload. Each file is named by document_id and contains the actual
+# attachment content (base64) plus triage results. These files replace the
+# mock API's fixed/seeded extraction data — read from here to get real content
+# based on document_id instead of querying the mock API for seeded payloads.
+# Remove this section once the mock API or real SAP Document AI can return
+# extraction results from the actual uploaded file content.
+
+TEMP_INPUT_DIR = _LANGGRAPH_DIR / "temp_input"
+
+
+def _ensure_temp_input_dir() -> Path:
+    """Create the temp_input directory if it doesn't exist."""
+    TEMP_INPUT_DIR.mkdir(parents=True, exist_ok=True)
+    return TEMP_INPUT_DIR
+
+
+def _save_payload_to_temp(document_id: str, payload: dict[str, Any]) -> str:
+    """Save a JSON payload to temp_input/{document_id}.json.
+
+    Returns the file path where the payload was saved.
+    """
+    _ensure_temp_input_dir()
+    file_path = TEMP_INPUT_DIR / f"{document_id}.json"
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, default=str, ensure_ascii=False)
+    logger.info("  Saved payload to temp_input: %s", file_path.name)
+    return str(file_path)
+
+
+def _load_payload_from_temp(document_id: str) -> dict[str, Any] | None:
+    """Load a JSON payload from temp_input/{document_id}.json.
+
+    Returns None if the file does not exist.
+    """
+    file_path = TEMP_INPUT_DIR / f"{document_id}.json"
+    if not file_path.exists():
+        return None
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 
 # ── Triage Node ────────────────────────────────────────────────────────────
 
@@ -116,6 +160,29 @@ def triage_documents(relevant_emails: list, dry_run: bool = False) -> tuple[list
                 # Call Triage Agent entry point
                 result = run_triage(file_path=temp_path, file_name=att_name)
 
+                # TEMP: Save the upload payload + triage result to temp_input
+                # folder, keyed by a generated document_id. This file contains
+                # the actual attachment contentBytes (base64) and can be used
+                # to retrieve real content by document_id instead of relying on
+                # the mock API's fixed/seeded extraction data.
+                _doc_id = str(uuid.uuid4())
+                _payload = {
+                    "document_id": _doc_id,
+                    "attachment_name": att_name,
+                    "attachment_contentBytes": attachment.get("contentBytes", ""),
+                    "document_type": email.category,
+                    "triage_result": result,
+                    "email_context": {
+                        "message_id": email.message_id,
+                        "subject": email.subject,
+                        "sender": email.sender,
+                        "sender_name": email.sender_name,
+                        "recipients": email.recipients,
+                        "received_date": email.received_date,
+                    },
+                }
+                _save_payload_to_temp(_doc_id, _payload)
+
                 # Enrich result with email context
                 result["email_context"] = {
                     "message_id": email.message_id,
@@ -128,11 +195,11 @@ def triage_documents(relevant_emails: list, dry_run: bool = False) -> tuple[list
                 }
 
                 triage_results.append(result)
-                logger.info("  Triage result: type=%s company=%s direct_intercompany=%s invoice_type=%s review=%s",
+                logger.info("  Category: %s", email.category)
+                logger.info("  Triage result: type=%s company=%s direct_intercompany=%s review=%s",
                             result.get("document_type"),
                             result.get("company_classification"),
                             result.get("direct_intercompany"),
-                            result.get("invoice_type"),
                             result.get("review_required"))
 
             except Exception as exc:
