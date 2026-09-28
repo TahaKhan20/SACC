@@ -66,13 +66,20 @@ def _get_credentials() -> tuple[str, str]:
     """Read credentials from env vars at call time (not import time)."""
     return os.getenv("GRAPH_USER_ID", ""), os.getenv("GRAPH_API_TOKEN", "")
 
-_INVOICE_KEYWORDS = [
-    "invoice", "rechnung", "factura", "credit note", "gutschrift",
-    "statement", "account summary", "kontoauszug",
-    "bill", "payment", "supplier", "vendor", "purchase order",
-    "fuel", "charter", "maintenance", "ground handling",
-    "sap", "document ai", "attachment",
+# ── Category Mapping (single source of truth for keywords) ───────────────
+
+_KEYWORD_CATEGORIES = [
+    ("Invoice",              ["invoice", "in"]),
+    ("Credit Note",          ["credit note", "credit memo"]),
+    ("Supporting Document",  ["supporting document", "delivery note", "packing slip", "proof of delivery"]),
+    ("Reconciliation",       ["reconciliation", "discrepancy"]),
+    ("Statement of Account", ["statement of account", "account summary", "account statement"]),
+    ("Purchase Order List",  ["purchase order", "order list", "po list"]),
+    ("General Correspondence", ["correspondence", "notification", "reminder"]),
 ]
+
+# Flat keyword list derived from _KEYWORD_CATEGORIES — do not edit manually.
+_INVOICE_KEYWORDS = [kw for _cat, kws in _KEYWORD_CATEGORIES for kw in kws]
 
 _DOCUMENT_EXTENSIONS = {
     ".pdf", ".png", ".jpg", ".jpeg", ".tif", ".tiff",
@@ -100,6 +107,29 @@ class EmailMessage:
     attachments: list[dict[str, Any]] = field(default_factory=list)
     importance: str = "normal"
     is_read: bool = False
+    score: int = 0
+    category: str = ""
+    score_details: list[str] = field(default_factory=list)
+
+
+def _categorize_email(email: EmailMessage) -> str:
+    """Return a category label based on which keyword group matches first.
+
+    Checks subject, body, and attachment names against each group in order.
+    Returns 'Uncategorized' if no group matches.
+    """
+    combined = " ".join([
+        email.subject.lower(),
+        email.body_preview.lower(),
+        email.body_content.lower(),
+    ])
+    for att in email.attachments:
+        combined += " " + att.get("name", "").lower()
+
+    for category, keywords in _KEYWORD_CATEGORIES:
+        if any(kw in combined for kw in keywords):
+            return category
+    return "General Correspondence"
 
 
 # ── Node 1: Fetch Emails ───────────────────────────────────────────────────
@@ -217,72 +247,98 @@ def _has_document_attachment(email: EmailMessage) -> bool:
     return False
 
 
-def _score_email_relevance(email: EmailMessage) -> int:
-    """Score how likely this email contains a document for triage (0-100).
+# ── Scoring Weights (tunable) ─────────────────────────────────────────────
+SUBJECT_KEYWORD_POINTS = 20      # rule 1: keyword in subject
+BODY_KEYWORD_POINTS = 20        # rule 2: keyword in body
+HAS_ATTACHMENT_POINTS = 30      # rule 3: any attachment present
+ATTACHMENT_KEYWORD_POINTS = 30  # rule 4: keyword in attachment name
+MIN_SCORE_THRESHOLD = 50        # emails with 50+ go to next agent
 
-    Scoring rules (adjust the constants below to tune):
-        1. Keyword in subject               → 20 points
-        2. Keyword in body                  → 20 points
-        3. Has any attachment               → 30 points
-        4. Keyword in attachment name       → 30 points
-        ─────────────────────────────────────────────────
-        Maximum possible                      → 100 points
-        Emails with 50+ points go to next agent.
 
-    Document priority: an email with keywords but no attachment
-    scores at most 40 (below threshold) — only emails carrying
-    actual documents proceed to downstream processing.
+def _score_with_details(email: EmailMessage) -> tuple[int, list[dict]]:
+    """Score an email and return (score, breakdown of each rule).
+
+    Each rule entry: {"rule": str, "matched": bool, "points": int, "keywords": list}
     """
-    # ── Tunable weights ──────────────────────────────────────────────
-    SUBJECT_KEYWORD_POINTS = 20     # rule 1: keyword in subject
-    BODY_KEYWORD_POINTS = 20       # rule 2: keyword in body
-    HAS_ATTACHMENT_POINTS = 30     # rule 3: any attachment present
-    ATTACHMENT_KEYWORD_POINTS = 30  # rule 4: keyword in attachment name
-    # ────────────────────────────────────────────────────────────────
-
     subject_lower = email.subject.lower()
     body_lower = (email.body_preview + " " + email.body_content).lower()
 
+    details = []
     score = 0
 
     # Rule 1: keyword in subject
-    if any(kw in subject_lower for kw in _INVOICE_KEYWORDS):
-        score += SUBJECT_KEYWORD_POINTS
+    matched = [kw for kw in _INVOICE_KEYWORDS if kw in subject_lower]
+    hit = bool(matched)
+    score += SUBJECT_KEYWORD_POINTS if hit else 0
+    details.append({"rule": "keyword in subject", "matched": hit,
+                    "points": SUBJECT_KEYWORD_POINTS if hit else 0, "keywords": matched})
 
     # Rule 2: keyword in body
-    if any(kw in body_lower for kw in _INVOICE_KEYWORDS):
-        score += BODY_KEYWORD_POINTS
+    matched = [kw for kw in _INVOICE_KEYWORDS if kw in body_lower]
+    hit = bool(matched)
+    score += BODY_KEYWORD_POINTS if hit else 0
+    details.append({"rule": "keyword in body", "matched": hit,
+                    "points": BODY_KEYWORD_POINTS if hit else 0, "keywords": matched})
 
     # Rule 3: has any attachment
-    if email.has_attachments or email.attachments:
-        score += HAS_ATTACHMENT_POINTS
+    has_att = email.has_attachments or email.attachments
+    score += HAS_ATTACHMENT_POINTS if has_att else 0
+    details.append({"rule": "has attachment", "matched": has_att,
+                    "points": HAS_ATTACHMENT_POINTS if has_att else 0, "keywords": []})
 
     # Rule 4: keyword in attachment name
+    matched = []
     for att in email.attachments:
         att_name = att.get("name", "").lower()
-        if any(kw in att_name for kw in _INVOICE_KEYWORDS):
-            score += ATTACHMENT_KEYWORD_POINTS
-            break
+        for kw in _INVOICE_KEYWORDS:
+            if kw in att_name and kw not in matched:
+                matched.append(kw)
+    hit = bool(matched)
+    score += ATTACHMENT_KEYWORD_POINTS if hit else 0
+    details.append({"rule": "keyword in attachment name", "matched": hit,
+                    "points": ATTACHMENT_KEYWORD_POINTS if hit else 0, "keywords": matched})
 
-    return min(100, score)
+    return min(100, score), details
+
+
+def _score_email_relevance(email: EmailMessage) -> int:
+    """Score how likely this email contains a document for triage (0-100)."""
+    score, _ = _score_with_details(email)
+    return score
 
 
 def classify_emails(emails: list[EmailMessage], min_score: int = 50) -> list[EmailMessage]:
     """Classify emails by sender, subject, content, and attachments.
 
     Returns the subset of emails whose relevance score >= min_score.
+    Logs scoring breakdown for both relevant and skipped emails.
     """
     logger.info("Node 3: Classifying %d emails (min_score=%d) …", len(emails), min_score)
 
     relevant: list[EmailMessage] = []
     for email in emails:
-        score = _score_email_relevance(email)
+        score, details = _score_with_details(email)
+        # Build human-readable breakdown lines
+        breakdown = []
+        for d in details:
+            mark = "\u2713" if d["matched"] else "\u2717"
+            kws = f"  [{', '.join(d['keywords'])}]" if d["keywords"] else ""
+            breakdown.append(f"  {mark} {d['rule']} ({d['points']}pts){kws}")
+
         if score >= min_score:
+            email.score = score
+            email.category = _categorize_email(email)
+            email.score_details = breakdown
             relevant.append(email)
-            logger.info("  RELEVANT  score=%3d  subject='%s'  from=%s  attachments=%d",
-                        score, email.subject[:60], email.sender, len(email.attachments))
+            logger.info("  \u2713 RELEVANT  score=%3d  category=%s  subject='%s'  from=%s  attachments=%d",
+                        score, email.category, email.subject[:60], email.sender, len(email.attachments))
+            for line in breakdown:
+                logger.info("    %s", line)
         else:
-            logger.debug("  SKIP       score=%3d  subject='%s'", score, email.subject[:60])
+            logger.info("  \u2717 SKIP  score=%3d  (needs %d more for threshold %d)  subject='%s'",
+                        score, min_score - score, min_score, email.subject[:60])
+            for line in breakdown:
+                logger.info("    %s", line)
 
     logger.info("Classification: %d relevant emails out of %d total", len(relevant), len(emails))
     return relevant
@@ -375,7 +431,9 @@ def main() -> None:
     }, indent=2))
 
     for email in result["relevant_emails"]:
-        print(f"  [{email.subject[:60]}] from {email.sender} — {len(email.attachments)} attachments")
+        print(f"  [{email.category}] score={email.score}  '{email.subject[:50]}'  from {email.sender}  — {len(email.attachments)} attachments")
+        for line in email.score_details:
+            print(f"    {line}")
 
 
 if __name__ == "__main__":
