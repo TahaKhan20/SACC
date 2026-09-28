@@ -218,37 +218,56 @@ def _has_document_attachment(email: EmailMessage) -> bool:
 
 
 def _score_email_relevance(email: EmailMessage) -> int:
-    """Score how likely this email contains a document for triage (0-100)."""
-    score = 0
-    combined_text = " ".join([
-        email.subject.lower(),
-        email.body_preview.lower(),
-        email.body_content.lower(),
-    ])
+    """Score how likely this email contains a document for triage (0-100).
+
+    Scoring rules (adjust the constants below to tune):
+        1. Keyword in subject               → 20 points
+        2. Keyword in body                  → 20 points
+        3. Has any attachment               → 30 points
+        4. Keyword in attachment name       → 30 points
+        ─────────────────────────────────────────────────
+        Maximum possible                      → 100 points
+        Emails with 50+ points go to next agent.
+
+    Document priority: an email with keywords but no attachment
+    scores at most 40 (below threshold) — only emails carrying
+    actual documents proceed to downstream processing.
+    """
+    # ── Tunable weights ──────────────────────────────────────────────
+    SUBJECT_KEYWORD_POINTS = 20     # rule 1: keyword in subject
+    BODY_KEYWORD_POINTS = 20       # rule 2: keyword in body
+    HAS_ATTACHMENT_POINTS = 30     # rule 3: any attachment present
+    ATTACHMENT_KEYWORD_POINTS = 30  # rule 4: keyword in attachment name
+    # ────────────────────────────────────────────────────────────────
 
     subject_lower = email.subject.lower()
-    matched_subject = [kw for kw in _INVOICE_KEYWORDS if kw in subject_lower]
-    if matched_subject:
-        score += min(30, len(matched_subject) * 10)
+    body_lower = (email.body_preview + " " + email.body_content).lower()
 
-    matched_body = [kw for kw in _INVOICE_KEYWORDS if kw in combined_text]
-    if matched_body:
-        score += min(25, len(matched_body) * 5)
+    score = 0
 
-    if _has_document_attachment(email):
-        score += 30
+    # Rule 1: keyword in subject
+    if any(kw in subject_lower for kw in _INVOICE_KEYWORDS):
+        score += SUBJECT_KEYWORD_POINTS
 
-    if email.has_attachments:
-        score += 10
+    # Rule 2: keyword in body
+    if any(kw in body_lower for kw in _INVOICE_KEYWORDS):
+        score += BODY_KEYWORD_POINTS
 
-    if email.sender and not email.sender.endswith("@outlook.com"):
-        if any(domain in email.sender.lower() for domain in [".com", ".net", ".org", ".sa", ".ae"]):
-            score += 5
+    # Rule 3: has any attachment
+    if email.has_attachments or email.attachments:
+        score += HAS_ATTACHMENT_POINTS
+
+    # Rule 4: keyword in attachment name
+    for att in email.attachments:
+        att_name = att.get("name", "").lower()
+        if any(kw in att_name for kw in _INVOICE_KEYWORDS):
+            score += ATTACHMENT_KEYWORD_POINTS
+            break
 
     return min(100, score)
 
 
-def classify_emails(emails: list[EmailMessage], min_score: int = 20) -> list[EmailMessage]:
+def classify_emails(emails: list[EmailMessage], min_score: int = 50) -> list[EmailMessage]:
     """Classify emails by sender, subject, content, and attachments.
 
     Returns the subset of emails whose relevance score >= min_score.
@@ -301,7 +320,7 @@ def save_attachment_to_temp(attachment: dict[str, Any]) -> Optional[str]:
 
 def run_intake(
     top: int = 50,
-    min_score: int = 20,
+    min_score: int = 50,
 ) -> dict[str, Any]:
     """Run all three intake nodes: fetch → enrich → classify.
 
@@ -341,7 +360,7 @@ def main() -> None:
         description="Email Intake Agent: fetch and classify emails from Microsoft Graph.",
     )
     parser.add_argument("--top", type=int, default=50, help="Max emails to fetch")
-    parser.add_argument("--min-score", type=int, default=20, help="Min relevance score")
+    parser.add_argument("--min-score", type=int, default=50, help="Min relevance score (50+ goes to next agent)")
     args = parser.parse_args()
 
     result = run_intake(top=args.top, min_score=args.min_score)
