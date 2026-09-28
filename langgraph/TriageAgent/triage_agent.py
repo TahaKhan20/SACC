@@ -228,6 +228,12 @@ class DocAIApiClient:
         resp.raise_for_status()
         return resp.json()
 
+    def list_documents(self) -> list[dict[str, Any]]:
+        """List all Document records."""
+        resp = self.client.get(self._url("Documents"))
+        resp.raise_for_status()
+        return resp.json()
+
     def update_document(self, doc_id: str, updates: dict[str, Any]) -> dict[str, Any]:
         """Update a Document record (e.g. set schema_ID, status)."""
         resp = self.client.patch(self._url("Documents", "/item"), params={"ID": doc_id}, json=updates)
@@ -243,29 +249,28 @@ class DocAIApiClient:
         return resp.json()
 
     def upload_file(self, file_name: str, file_content: bytes) -> dict[str, Any]:
-        """Upload a file to Document AI.
+        """Upload a file to Document AI via the SACC mock API.
 
-        NOTE: The mock Files entity has insertable=false, so this cannot
-        create a real file record. In production, this would call the real
-        SAP Document AI file upload endpoint (multipart/form-data).
-        We generate a placeholder GUID and return a mock file reference.
+        Sends the actual PDF bytes (base64-encoded) to the Files entity
+        via POST.  Requires the SACC mock API to be running and the
+        Files entity to be insertable (see EDMX configuration).
         """
-        # TODO: Replace with real SAP Document AI file upload.
-        # Real endpoint: POST {SAP_DOCAI_BASE_URL}/document/jobs
-        # with multipart/form-data, requires OAuth token from SAP_DOCAI_AUTH_URL.
-        mock_file_id = str(uuid.uuid4())
-        logger.warning(
-            "File upload is mocked -- Files entity is read-only in SACC mock. "
-            "Generated placeholder file_id=%s. Replace with real SAP Document AI upload.",
-            mock_file_id,
-        )
-        return {
-            "ID": mock_file_id,
+        import base64
+        file_id = str(uuid.uuid4())
+        payload = {
+            "ID": file_id,
             "name": file_name,
-            "_mock": True,
-            "_note": "File upload not implemented in SACC mock API. "
-            "Files entity has insertable=false. Use real SAP Document AI endpoint.",
+            "contentBytes": base64.b64encode(file_content).decode("utf-8"),
+            "size": len(file_content),
         }
+        resp = self.client.post(self._url("Files"), json=payload)
+        resp.raise_for_status()
+        file_record = resp.json()
+        logger.info(
+            "File uploaded to mock API: ID=%s, name=%s, size=%d bytes",
+            file_record.get("ID"), file_name, len(file_content),
+        )
+        return file_record
 
     # -- SchemaVersions ----------------------------------------------------
 
@@ -1052,12 +1057,63 @@ def run_triage(file_path: str = "", file_name: str = "") -> dict[str, Any]:
     return state.get("triage_result", {})
 
 
+def check_posted_documents() -> None:
+    """List all posted documents with their versions and extraction entities."""
+    client = _get_doc_ai_client()
+
+    docs = client.list_documents()
+    if not docs:
+        print("No documents posted to the mock API.")
+        return
+
+    print(f"\n{'=' * 80}")
+    print(f"POSTED DOCUMENTS ({len(docs)} total)")
+    print(f"{'=' * 80}")
+
+    for doc in docs:
+        doc_id = doc.get("ID", "")
+        status = doc.get("status", "")
+        file_id = doc.get("file_ID", "")
+        print(f"\n--- Document ID: {doc_id}")
+        print(f"    Status:    {status}")
+        print(f"    File ID:   {file_id}")
+
+        # List versions for this document
+        versions = client.list_document_versions(doc_id)
+        if versions:
+            for ver in versions:
+                ver_id = ver.get("ID", "")
+                ver_num = ver.get("version", "")
+                print(f"    Version:   {ver_num} (ID: {ver_id})")
+
+                # List extraction entities for this version
+                entities = client.get_extraction_results(ver_id)
+                if entities:
+                    print(f"    Entities:  {len(entities)} extraction results")
+                    for ent in entities:
+                        name = ent.get("name", "")
+                        value = _extract_value(ent)
+                        conf = ent.get("confidence", "")
+                        print(f"      - {name}: {value}  (confidence: {conf})")
+                else:
+                    print(f"    Entities:  none")
+        else:
+            print(f"    Versions:  none")
+
+    print(f"\n{'=' * 80}\n")
+
+
 def main():
     """CLI entry point."""
     import sys
     file_path = ""
     if len(sys.argv) > 1:
         file_path = sys.argv[1]
+
+    if file_path == "--check":
+        check_posted_documents()
+        return
+
     if not file_path:
         print("Usage: python triage_agent.py <file_path>")
         print("\nRunning with no file (will use mock/placeholder)...")

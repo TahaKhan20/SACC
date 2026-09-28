@@ -295,6 +295,8 @@
         </Key>
         <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
         <Property Name="name" Type="Edm.String" MaxLength="255"/>
+        <Property Name="contentBytes" Type="Edm.String"/>
+        <Property Name="size" Type="Edm.Int64"/>
       </EntityType>
       <EntityType Name="SystemInformation">
         <Key>
@@ -810,7 +812,7 @@
         </Annotation>
         <Annotation Term="Capabilities.InsertRestrictions">
           <Record Type="Capabilities.InsertRestrictionsType">
-            <PropertyValue Property="Insertable" Bool="false"/>
+            <PropertyValue Property="Insertable" Bool="true"/>
           </Record>
         </Annotation>
         <Annotation Term="Capabilities.UpdateRestrictions">
