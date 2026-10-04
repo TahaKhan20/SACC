@@ -1,0 +1,37 @@
+{
+  "sap.cloud.service": "com.sap.apps.documentinformationextraction",
+  "saasregistryenabled": true,
+  "html5-apps-repo": {
+    "app_host_id": "25ea7cd3-59b7-463b-becc-78dae39b1e56"
+  },
+  "uaa": {
+    "tenantmode": "shared",
+    "sburl": "https://internal-xsuaa.authentication.in30.hana.ondemand.com",
+    "subaccountid": "07cc5d78-e278-460c-a68a-852a452739e1",
+    "credential-type": "binding-secret",
+    "clientid": "sb-f7775325-9475-41f0-96e8-662592fdb6a1!b48605|dox-xsuaa-std-production!b15635",
+    "xsappname": "f7775325-9475-41f0-96e8-662592fdb6a1!b48605|dox-xsuaa-std-production!b15635",
+    "clientsecret": "905ad033-02c5-45fc-a81d-64d0f95be2d9$jO6usd9duaYVStlh32faJwog6K3tQdxNJEGLsL87FxQ=",
+    "serviceInstanceId": "f7775325-9475-41f0-96e8-662592fdb6a1",
+    "url": "https://sap-ap-ai-development-ggk3xov0.authentication.in30.hana.ondemand.com",
+    "uaadomain": "authentication.in30.hana.ondemand.com",
+    "verificationkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZuJAGG89g/aTJzqmL3P\nxSTgqm3Uo8y9+ji0E7Z1v1Ci7OMJ6YqZiFHtgwz+aryK4lMOK4UCQGiQZjj1A+1g\nT/kXlkL9XVcIeRgVJJFT0OKzmHmsrv0Snebdg5o/c4P7qofQtv8i8PuarDnA2a2O\n/feVP3hUZOtN2tmif5tXAH53Jfk47cVRaFI/6sSGymzX6Z476XgK0SL4MbOqjizq\nSoUhcFeQRfCsBuVW7725BfoMhuYbLSLnJCpgu+cjRLKomsRd2PrH1fQKMoYj0qLY\n68CrsfKncNk8Wee/LOIXL1GjbtnZwK7IPAmR9KOMv/MxhEnu73aieGfOMmGImsQ0\nCwIDAQAB\n-----END PUBLIC KEY-----",
+    "apiurl": "https://api.authentication.in30.hana.ondemand.com",
+    "identityzone": "sap-ap-ai-development-ggk3xov0",
+    "identityzoneid": "07cc5d78-e278-460c-a68a-852a452739e1",
+    "tenantid": "07cc5d78-e278-460c-a68a-852a452739e1",
+    "zoneid": "07cc5d78-e278-460c-a68a-852a452739e1"
+  },
+  "url": "https://in30.doc.cloud.sap",
+  "dwcreuseservice": true,
+  "swagger": "/document-information-extraction/v1/",
+  "resturl": "/document-information-extraction/v1/",
+  "odataurl": "/document-ai/v1/",
+  "endpoints": {
+    "backend": {
+      "url": "https://in30.doc.cloud.sap",
+      "timeout": 30000
+    }
+  },
+  "tenantuiurl": "https://sap-ap-ai-development-ggk3xov0.in30.doc.cloud.sap"
+}

@@ -1,4 +1,4 @@
-"""Email Admission Rules — Production-Ready Engine
+th """Email Admission Rules — Production-Ready Engine
 ===================================================
 
 Pre-processing gate that evaluates incoming emails before they enter

@@ -1,0 +1,15 @@
+{
+    "clientid": "sb-12fab748-0f70-4aa6-911f-cefa192d19a7!b48605|xsuaa_std!b16853",
+    "clientsecret": "66549b3b-81ad-4d16-b381-b392e4a261fe$IvcVq4KRFEmt2IacpTmCi6P3jmUG2N2cLjBCrw5iWig=",
+    "url": "https://sap-ap-ai-development-ggk3xov0.authentication.in30.hana.ondemand.com",
+    "identityzone": "sap-ap-ai-development-ggk3xov0",
+    "identityzoneid": "07cc5d78-e278-460c-a68a-852a452739e1",
+    "appname": "12fab748-0f70-4aa6-911f-cefa192d19a7!b48605|xsuaa_std!b16853",
+    "credential-type": "binding-secret",
+    "serviceurls": {
+        "AI_API_URL": "https://api.ai.prod-in30.asia-south1.gcp.ml.hana.ondemand.com"
+    },
+    "token-type": [
+        "xsuaa"
+    ]
+}
